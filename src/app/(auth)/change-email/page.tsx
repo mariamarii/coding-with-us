@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import AuthChangeForm from '@/components/auth/AuthChangeForm';
 
-export default function ForgotPasswordPage() {
+export default function ChangeEmailPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F9F9F9] px-4">
       <div className="grid md:grid-cols-2 gap-0 max-w-6xl w-full">
