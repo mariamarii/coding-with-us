@@ -13,16 +13,16 @@ const CallbackPage = () => {
 
     if (error) {
      
-      router.push('/?error=mariam');
+      router.push('/?error=auth_failed');
       return;
     }
 
     if (token) {
-      // Store token in localStorage (or cookies if SSR required)
+     
       localStorage.setItem('accessToken', token);
       router.push('/');
     } else {
-      router.push('/?error=moaz');
+      router.push('/?error=auth_failed');
     }
   }, [router, searchParams]);
 
