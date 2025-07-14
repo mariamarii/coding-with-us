@@ -13,12 +13,10 @@ const CourseCard = ({
   inCart = false,
 }: cartCourse) => {
   return (
-<div className="relative w-full max-w-[344px] min-h-[400px] bg-white rounded-xl shadow-md p-4 sm:p-6 flex flex-col justify-between border border-[#f2f2f2] overflow-hidden mx-auto">
-      {/* Z-10 = Content on top */}
+<div className="relative w-full max-w-[344px] min-h-[400px] bg-white rounded-xl shadow-md p-4 sm:p-6 flex flex-col justify-between border border-[#f2f2f2] border-t-[8px] border-t-[#76B729] overflow-hidden mx-auto">
       <div className="relative z-10">
         <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 line-clamp-2">{title}</h3>
         
-        {/* Tags */}
        <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
   {isBestSeller && (
     <span className="bg-[#FFDEDE] text-[#DA7373] px-2 py-[2px] rounded-md leading-none">
