@@ -8,7 +8,7 @@ export type SignupData = {
   email: string;
   password: string;
 };
-// types/auth.ts
+
 export interface LoginResponse {
   accessToken: string;
   expiresIn?: number;
@@ -22,13 +22,7 @@ export interface AuthUser {
   email: string;
   fullName: string;
 }
-export interface LoginSuccessResponse {
-  accessToken: string;
-  expiresIn?: number;
-  tokenType?: string;
-  sessionState?: string;
-}
-
+export type LoginSuccessResponse = LoginResponse;
 export interface DecodedJWT {
   sub: string;
   name?: string;
