@@ -27,7 +27,7 @@ export default function ChangePasswordPage() {
         </div>
 
         <div className="flex flex-col justify-center w-full px-6 py-12 md:px-10">
-          {/* ✅ Send token as prop */}
+         
           <AuthChangeForm 
             email={session?.user?.email ?? ''} 
             token={token ?? ''} 
