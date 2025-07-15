@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { LoginResponse, DecodedJWT } from "@/types/auth";
 
 if (process.env.NODE_ENV === "development") {
@@ -70,7 +70,9 @@ const handler = NextAuth({
 
   session: { strategy: "jwt" },
 
-  pages: { signIn: "/login" },
+  pages: {
+    signIn: "/login",
+  },
 
   callbacks: {
     async jwt({ token, user }) {
@@ -80,18 +82,20 @@ const handler = NextAuth({
         token.email = user.email;
         token.accessToken = user.token;
       }
+
+      console.log("🔑 JWT Token:", token); // ✅ LOG HERE
       return token;
     },
+
     async session({ session, token }) {
-      return {
-        ...session,
-        user: {
-          id: token.id,
-          name: token.name,
-          email: token.email,
-          accessToken: token.accessToken,
-        },
-      };
+      session.user.id = token.id as string;
+      session.user.name = token.name;
+      session.user.email = token.email;
+
+      (session as any).accessToken = token.accessToken;
+
+      console.log("📦 Session Object:", session); // ✅ LOG HERE
+      return session;
     },
   },
 

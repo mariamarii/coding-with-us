@@ -10,17 +10,18 @@ export default function ResetPasswordConfirmPage() {
   const emailFromUrl = searchParams.get('email');
   const tokenFromUrl = searchParams.get('token');
 
-  const [email, setEmail] = useState(emailFromUrl || '');
-  const [token, setToken] = useState(tokenFromUrl || '');
+  const [email, setEmail] = useState('');
+  const [token, setToken] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    if (emailFromUrl) setEmail(emailFromUrl);
-    if (tokenFromUrl) setToken(tokenFromUrl);
-  }, [emailFromUrl, tokenFromUrl]);
+ useEffect(() => {
+  if (emailFromUrl) setEmail(emailFromUrl);
+  if (tokenFromUrl) setToken(tokenFromUrl.replace(/ /g, '+')); 
+}, [emailFromUrl, tokenFromUrl]);
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,15 +35,27 @@ export default function ResetPasswordConfirmPage() {
     }
 
     try {
+      console.log('Submitting reset with:', { email, token, password: newPassword });
+
       const res = await fetch('https://localhost:7061/api/v1/users/reset-password-confirm', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, token, newPassword }),
+        body: JSON.stringify({
+          email,
+          token,
+          password: newPassword, // Match backend expected field
+        }),
       });
 
       if (!res.ok) {
-        const { message } = await res.json();
-        throw new Error(message || 'Failed to reset password.');
+        const text = await res.text();
+        console.error('Raw backend response:', text);
+
+        if (text.includes('InvalidToken')) {
+          throw new Error('The reset token is invalid or has expired.');
+        }
+
+        throw new Error(text || 'Failed to reset password.');
       }
 
       setStatus('success');
@@ -56,26 +69,19 @@ export default function ResetPasswordConfirmPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-md bg-white rounded-lg p-6 shadow">
-        <h2 className="text-2xl font-bold mb-4">Reset Your Password</h2>
+    <div className="flex items-center justify-center min-h-screen px-4 bg-gray-50">
+      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow">
+        <h2 className="mb-4 text-2xl font-bold">Reset Your Password</h2>
 
         {status === 'success' ? (
           <p className="text-[#76B729] font-medium">
-             Password reset successful. Redirecting to login...
+            Password reset successful. Redirecting to login...
           </p>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              type="hidden"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              type="hidden"
-              value={token}
-              onChange={(e) => setToken(e.target.value)}
-            />
+            {/* hidden inputs for token and email (not required, but preserved) */}
+            <input type="hidden" value={email} readOnly />
+            <input type="hidden" value={token} readOnly />
 
             <div>
               <label htmlFor="newPassword" className="block text-sm font-medium">
@@ -113,7 +119,7 @@ export default function ResetPasswordConfirmPage() {
               {status === 'loading' ? 'Submitting...' : 'Reset Password'}
             </button>
 
-            {status === 'error' && <p className="text-red-600 text-sm">{error}</p>}
+            {status === 'error' && <p className="text-sm text-red-600">{error}</p>}
           </form>
         )}
       </div>

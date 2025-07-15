@@ -1,11 +1,20 @@
+'use client';
+
 import Image from 'next/image';
 import AuthChangeForm from '@/components/auth/AuthChangeForm';
+import { useSession } from 'next-auth/react';
 
 export default function ChangePasswordPage() {
+  const { data: session, status } = useSession();
+  const token = session?.accessToken; // ✅ Correct access to token
+
+  if (status === 'loading') {
+    return <div className="flex items-center justify-center h-screen">Loading...</div>;
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F9F9F9] px-4">
-      <div className="grid md:grid-cols-2 gap-0 max-w-6xl w-full">
-     
+      <div className="grid w-full max-w-6xl gap-0 md:grid-cols-2">
         <div className="hidden md:block">
           <Image
             src="/authform.svg"
@@ -17,8 +26,12 @@ export default function ChangePasswordPage() {
           />
         </div>
 
-        <div className="flex flex-col justify-center px-6 md:px-10 py-12 w-full">
-          <AuthChangeForm />
+        <div className="flex flex-col justify-center w-full px-6 py-12 md:px-10">
+          {/* ✅ Send token as prop */}
+          <AuthChangeForm 
+            email={session?.user?.email ?? ''} 
+            token={token ?? ''} 
+          />
         </div>
       </div>
     </div>
