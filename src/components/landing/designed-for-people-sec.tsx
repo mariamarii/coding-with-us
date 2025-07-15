@@ -12,6 +12,7 @@ const FeatureItem: React.FC<FeatureItemProps> = ({ icon, title, description }) =
         <h3 className="inline font-bold text-xl leading-none tracking-normal text-[#282837] mr-1">
           {title}
         </h3>
+      
         <span className="inline font-inter font-normal text-xl leading-none tracking-normal text-[#282837] sm:block sm:mt-2 lg:inline lg:mt-0">
           {description}
         </span>
