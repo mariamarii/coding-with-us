@@ -14,6 +14,7 @@ export const api = {
   resetPasswordConfirm: () => `${API_BASE_URL}/Api/V1/users/reset-password-confirm`,
   changePassword: () => `${API_BASE_URL}/Api/V1/users/change-password`,
   changeEmail: () => `${API_BASE_URL}/Api/V1/users/change-email`,
+  forgotPassword: () => `${API_BASE_URL}/Api/V1/users/forgot-password`,
 
  
 };

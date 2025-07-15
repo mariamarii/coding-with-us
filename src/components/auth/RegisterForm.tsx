@@ -105,7 +105,31 @@ const RegisterForm = ({ mode }: Props) => {
         <span className="flex-1 h-[0.2px] bg-[#ccc] dark:bg-gray-600 ml-3"></span>
       </div>
 
+
       <SocialLogin />
+      <div className="text-sm text-center text-[#666] dark:text-white">
+        {mode === 'signup' ? (
+          <>
+            Already have an account?{' '}
+            <a
+              href="/login"
+                className="text-[var(--green-primary)] hover:underline dark:text-[#36C323]"
+              >
+                Login
+              </a>
+            </>
+          ) : ( 
+            <>
+              New to Coding with Us?{' '}
+              <a
+                href="/signup"
+                className="text-[var(--green-primary)] hover:underline dark:text-#36C323"
+              >
+                Sign up
+              </a>
+            </>
+          ) }
+        </div>
     </form>
   );
 };

@@ -2,6 +2,9 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useForgotPassword } from '@/hooks/useForgotPassword';
+import { useChangePassword } from '@/hooks/useChangePassword';
+import { useChangeEmail } from '@/hooks/useChangeEmail';
 
 type Props = {
   email: string;
@@ -17,9 +20,6 @@ const AuthChangeForm = ({ email: loggedInEmail, token }: Props) => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [newEmail, setNewEmail] = useState('');
-
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [error, setError] = useState('');
 
   const isForgotPassword = pathname.includes('/forgot');
   const isChangePassword = pathname.includes('/change-password');
@@ -37,74 +37,45 @@ const AuthChangeForm = ({ email: loggedInEmail, token }: Props) => {
     ? 'Enter your old and new password below.'
     : 'Enter your new email address below.';
 
+
+  const forgotPasswordMutation = useForgotPassword();
+  const changePasswordMutation = useChangePassword(token);
+  const changeEmailMutation = useChangeEmail(token);
+
+  const mutation =
+    isForgotPassword
+      ? forgotPasswordMutation
+      : isChangePassword
+      ? changePasswordMutation
+      : changeEmailMutation;
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus('loading');
-    setError('');
 
     try {
-      let url = '';
-      let payload: any = {};
-
       if (isForgotPassword) {
-        url = 'https://localhost:7061/api/v1/users/reset-password';
-        payload = { email };
+        await forgotPasswordMutation.mutateAsync({ email });
       } else if (isChangePassword) {
         if (newPassword !== confirmPassword) {
-          setStatus('error');
-          setError('Passwords do not match.');
-          return;
+          throw new Error('Passwords do not match.');
         }
-        url = 'https://localhost:7061/api/v1/users/change-password';
-        payload = {
+        await changePasswordMutation.mutateAsync({
           email: loggedInEmail,
           oldPassword,
           newPassword,
-        };
+        });
       } else if (isChangeEmail) {
-        url = 'https://localhost:7061/api/v1/users/change-email';
-        payload = {
+        await changeEmailMutation.mutateAsync({
           oldEmail: loggedInEmail,
           newEmail,
-        };
+        });
       }
-      console.log("🔍 API Request", {
-  url,
-  payload,
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`,
-  },
-});
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`, // ✅ use token prop
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) {
-        const text = await res.text();
-        let message = 'Request failed.';
-        try {
-          const json = text ? JSON.parse(text) : null;
-          message = json?.message || message;
-        } catch {
-          console.error('Failed to parse JSON:', text);
-        }
-        throw new Error(message);
-      }
-
-      setStatus('success');
 
       if (isChangePassword || isChangeEmail) {
         setTimeout(() => router.push('/login'), 2000);
       }
     } catch (err: any) {
-      setStatus('error');
-      setError(err.message || 'Something went wrong.');
+      // Error is already handled in mutation.onError 
     }
   };
 
@@ -113,7 +84,7 @@ const AuthChangeForm = ({ email: loggedInEmail, token }: Props) => {
       <h1 className="mb-2 text-2xl font-bold">{title}</h1>
       <p className="mb-6 text-sm text-gray-600">{description}</p>
 
-      {status === 'success' ? (
+      {mutation.isSuccess ? (
         <p className="text-[#76B729] font-medium">
           {isForgotPassword
             ? 'Reset link sent successfully. Check your email.'
@@ -194,10 +165,10 @@ const AuthChangeForm = ({ email: loggedInEmail, token }: Props) => {
 
           <button
             type="submit"
-            disabled={status === 'loading'}
+            disabled={mutation.isLoading}
             className="w-full bg-[#76B729] hover:bg-[#aada55] text-white font-semibold py-3 rounded-md transition"
           >
-            {status === 'loading' ? 'Processing...' : title}
+            {mutation.isLoading ? 'Processing...' : title}
           </button>
 
           <button
@@ -208,8 +179,10 @@ const AuthChangeForm = ({ email: loggedInEmail, token }: Props) => {
             {isForgotPassword ? 'Back to login page' : 'Back to home page'}
           </button>
 
-          {status === 'error' && (
-            <p className="text-sm text-red-600">{error}</p>
+          {mutation.isError && (
+            <p className="text-sm text-red-600">
+              {(mutation.error as Error)?.message || 'Something went wrong.'}
+            </p>
           )}
         </form>
       )}

@@ -1,32 +1,36 @@
-// hooks/useUserLogin.ts
+
 'use client';
-import { useMutation } from '@tanstack/react-query';
+
+import { useApiMutation } from './useApiMutation';
+import { api } from '@/config/api';
 import { LoginData } from '@/types/auth';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
-export function useUserLogin() {
+export const useUserLogin = () => {
   const router = useRouter();
 
-  return useMutation({
-    mutationFn: async (data: LoginData) => {
-      const res = await signIn('credentials', {
-        email: data.email,
-        password: data.password,
+  return useApiMutation<LoginData>({
+    url: api.login(),
+    getBody: (data) => ({
+      email: data.email,
+      password: data.password,
+    }),
+    onSuccess: async (_, input) => {
+      const result = await signIn('credentials', {
         redirect: false,
+        email: input.email,
+        password: input.password,
       });
 
-      if (!res?.ok) {
-        throw new Error(res?.error ?? 'Login failed');
+      if (result?.ok) {
+        router.push('/');
+      } else {
+        throw new Error('Invalid credentials');
       }
-
-      return res;
     },
-    onSuccess: () => {
-      router.push('/');
-    },
-    onError: (error: any) => {
-      console.error('Login error:', error);
+    onError: (err) => {
+      console.error('Login error:', err.message);
     },
   });
-}
+};
