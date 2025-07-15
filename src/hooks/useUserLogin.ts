@@ -1,4 +1,4 @@
-
+// hooks/useUserLogin.ts
 'use client';
 
 import { useApiMutation } from './useApiMutation';
@@ -25,12 +25,9 @@ export const useUserLogin = () => {
 
       if (result?.ok) {
         router.push('/');
-      } else {
-        throw new Error('Invalid credentials');
       }
     },
     onError: (err) => {
-      console.error('Login error:', err.message);
     },
   });
 };

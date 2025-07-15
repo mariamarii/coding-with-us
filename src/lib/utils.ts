@@ -38,14 +38,25 @@ export const handleSignupSubmit = async (data: SignupData): Promise<void> => {
     });
 
     if (!res.ok) {
-      const errorText = await res.text();
-      console.error("Signup error response:", errorText);
-      throw new Error("Signup failed with status: " + res.status);
+      let message = 'Signup failed.';
+      const contentType = res.headers.get('content-type');
+
+      if (contentType?.includes('application/json')) {
+        const json = await res.json();
+
+        if (json.message?.toLowerCase().includes('duplicated')) {
+          message = 'This email already has an account.';
+        } else {
+          message = json.message || message;
+        }
+      }
+
+      throw new Error(message);
     }
 
     console.log("✅ Signup successful");
-  } catch (err) {
+  } catch (err: any) {
     console.error("Signup error:", err);
-    throw new Error("Signup failed. Please try again.");
+    throw new Error(err.message || "Signup failed. Please try again.");
   }
 };

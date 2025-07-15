@@ -1,12 +1,9 @@
-// hooks/useUserRegistration.ts
-'use client';
-
 import { useApiMutation } from './useApiMutation';
 import { api } from '@/config/api';
 import { SignupData } from '@/types/auth';
 import { useRouter } from 'next/navigation';
 
-export const useUserRegistration = () => {
+export const useUserRegistration = (setCustomError?: (msg: string) => void) => {
   const router = useRouter();
 
   return useApiMutation<SignupData>({
@@ -21,7 +18,9 @@ export const useUserRegistration = () => {
       router.push(`/confirm?email=${encodeURIComponent(input.email)}`);
     },
     onError: (err) => {
-      console.error('Signup error:', err.message);
+      if (setCustomError) {
+        setCustomError(err.message); 
+      }
     },
   });
 };
