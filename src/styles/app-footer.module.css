@@ -1,0 +1,283 @@
+.footer {
+  background-color: #2a2a3a;
+  color: #FFFFFF;
+  padding: 48px 0 16px;
+  margin-top: auto;
+  width: 100%;
+}
+
+.logoSection {
+  margin-bottom: 16px;
+}
+
+.logo {
+  margin-bottom: 16px;
+  max-width: 100%;
+  height: auto;
+}
+
+.description {
+  color: #FFFFFF;
+  margin-bottom: 16px;
+  line-height: 1.6;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
+.followText {
+  color: #FFFFFF;
+  margin-bottom: 16px;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.socialIcon {
+  width: 20px;
+  height: 20px;
+  color: #FFFFFF;
+  transition: color 0.3s ease;
+}
+
+.socialIcon:hover {
+  color: #ffffff;
+}
+
+.sectionTitle {
+  color: #ffffff;
+  margin-bottom: 16px;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+}
+
+.linksList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.link {
+  color: #FFFFFF;
+  text-decoration: none;
+  display: block;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: #ffffff;
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contactText {
+  color: #FFFFFF;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  margin-bottom: 8px;
+  word-break: break-all; /* Break long words to fit within the container */
+  overflow-wrap: break-word; /* Ensure text wraps within the container */
+}
+.appStores {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.storeButton {
+  max-width: 120px;
+  height: auto;
+  transition: opacity 0.3s ease;
+}
+
+.storeButton:hover {
+  opacity: 0.8;
+}
+
+.footerBottom {
+  border-top: 1px solid #FFFFFF;
+  margin-top: 32px;
+  padding-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.copyright {
+  color: #FFFFFF;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+}
+
+.footerLink {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  transition: color 0.3s ease;
+}
+
+.footerLink:hover {
+  color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer {
+    padding: 32px 0 16px;
+  }
+  
+  .logo {
+    max-width: 120px;
+    margin-bottom: 12px;
+  }
+  
+  .description {
+    font-size: 0.8rem;
+    margin-bottom: 12px;
+  }
+  
+  .followText {
+    font-size: 0.8rem;
+    margin-bottom: 12px;
+  }
+  
+  .sectionTitle {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+  
+  .link {
+    font-size: 0.8rem;
+  }
+  
+  .contactText {
+    font-size: 0.8rem;
+  }
+  
+  .appStores {
+    flex-direction: row;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  
+  .storeButton {
+    max-width: 100px;
+  }
+  
+  .footerBottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .copyright {
+    font-size: 0.8rem;
+  }
+  
+  .footerLink {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 24px 0 12px;
+  }
+  
+  .logo {
+    max-width: 100px;
+    margin-bottom: 8px;
+  }
+  
+  .description {
+    font-size: 0.75rem;
+    margin-bottom: 8px;
+  }
+  
+  .followText {
+    font-size: 0.75rem;
+    margin-bottom: 8px;
+  }
+  
+  .sectionTitle {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  
+  .linksList {
+    gap: 4px;
+  }
+  
+  .link {
+    font-size: 0.75rem;
+  }
+  
+  .contactText {
+    font-size: 0.75rem;
+    margin-bottom: 4px;
+  }
+  
+  .appStores {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  
+  .storeButton {
+    max-width: 90px;
+  }
+  
+  .footerBottom {
+    margin-top: 24px;
+    padding-top: 12px;
+    gap: 8px;
+  }
+  
+  .copyright {
+    font-size: 0.75rem;
+  }
+  
+  .footerLink {
+    font-size: 0.75rem;
+  }
+  
+  .socialIcons {
+    gap: 6px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .appStores {
+    flex-direction: row;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  .storeButton {
+    max-width: 110px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .footer {
+    padding: 48px 0 16px;
+  }
+  
+  .appStores {
+    gap: 8px;
+  }
+}

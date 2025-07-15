@@ -1,0 +1,272 @@
+/* Explore Menu Container */
+.exploreContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1200;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+  }
+  
+  .backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    pointer-events: auto;
+  }
+  
+  .menuWrapper {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: auto;
+    animation: slideDown 0.3s ease-out;
+  }
+  
+  .menuWrapper.closing {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+  
+  @keyframes slideUp {
+    0% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-20px);
+    }
+  }
+  
+  .menuPaper {
+    width: 716px;
+    height: 411px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .menuGrid {
+    height: 100%;
+    display: flex;
+  }
+  
+  .servicesSection {
+    flex: 1;
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .coursesSection {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sectionContent {
+    padding: 16px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sectionHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .sectionIcon {
+    margin-right: 8px;
+    color: #76B729;
+    display: flex;
+    align-items: center;
+  }
+  
+  .sectionTitle {
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+  
+  .sectionList {
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  .courseColumns {
+    flex: 1;
+    display: flex;
+    gap: 16px;
+    overflow-y: auto;
+  }
+  
+  .courseColumn {
+    flex: 1;
+  }
+  
+  .listContainer {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .listItem {
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    list-style: none;
+    margin-bottom: 2px;
+  }
+  
+  .listItem:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  
+  .listItemText {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .menuWrapper {
+      top: 80px;
+    }
+    
+    .menuPaper {
+      width: 95vw;
+      max-width: 500px;
+      height: 350px;
+    }
+    
+    .menuGrid {
+      flex-direction: column;
+    }
+    
+    .servicesSection {
+      border-right: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      flex: 0 0 auto;
+    }
+    
+    .coursesSection {
+      flex: 1;
+      min-height: 0;
+    }
+    
+    .sectionContent {
+      padding: 12px;
+    }
+    
+    .sectionHeader {
+      margin-bottom: 8px;
+    }
+    
+    .sectionTitle {
+      font-size: 0.875rem;
+    }
+    
+    .courseColumns {
+      gap: 8px;
+    }
+    
+    .listItemText {
+      font-size: 0.8rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .menuWrapper {
+      top: 70px;
+    }
+    
+    .menuPaper {
+      width: 98vw;
+      height: 300px;
+    }
+    
+    .sectionContent {
+      padding: 8px;
+    }
+    
+    .sectionHeader {
+      margin-bottom: 6px;
+    }
+    
+    .sectionTitle {
+      font-size: 0.8rem;
+    }
+    
+    .courseColumns {
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .listItem {
+      padding: 2px 4px;
+    }
+    
+    .listItemText {
+      font-size: 0.75rem;
+    }
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .menuPaper {
+      width: 600px;
+      height: 380px;
+    }
+  }
+  
+  @media (min-width: 1025px) {
+    .menuPaper {
+      width: 800px;
+      height: 450px;
+    }
+    
+    .sectionContent {
+      padding: 20px;
+    }
+    
+    .sectionHeader {
+      margin-bottom: 20px;
+    }
+    
+    .sectionTitle {
+      font-size: 1rem;
+    }
+    
+    .courseColumns {
+      gap: 20px;
+    }
+    
+    .listItemText {
+      font-size: 0.9rem;
+    }
+  }
