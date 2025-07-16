@@ -1,8 +1,11 @@
-import React from 'react';
-import { Star } from 'lucide-react';
-import { CourseCardProps } from '@/types/skills';
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Star } from "lucide-react";
+import React from "react";
+import { CourseCardProps } from "@/types/skills";
 
-const CourseCard: React.FC<CourseCardProps> = ({title,
+const CourseCard: React.FC<CourseCardProps> = ({
+  title,
   instructor,
   rating,
   reviews,
@@ -10,67 +13,78 @@ const CourseCard: React.FC<CourseCardProps> = ({title,
   originalPrice,
   badges,
   level,
-  imageUrl
+  imageUrl,
 }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex-shrink-0">
-          <div className="relative overflow-hidden">
-      <img
-        src={imageUrl}
-        alt={title}
-        className="w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-opacity-10"></div>
-    </div>
-
-      <div className="p-4">
-      <h3 className="font-bold text-gray-900 mb-2 text-xl leading-none tracking-normal line-clamp-2">
-        {title}
-      </h3>
-        
-        <p className="text-gray-600 mb-3 text-sm">{instructor}</p>
-
-        <div className="flex items-center mb-3">
-          <span className="text-yellow-500 font-bold mr-1 text-sm">{rating}</span>
-          <div className="flex mr-2">
+    <Card className="w-full bg-white max-w-sm max-w-[280px] sm:max-w-[340px] md:max-w-[300px] flex-shrink-0 flex flex-col">
+      <CardHeader className="p-0">
+        <div className="relative w-full h-[180px] sm:h-[220px] md:h-[268px] overflow-hidden rounded-t-lg">
+          <img
+            src="/course.png"
+            alt={title}
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-2 p-4 flex-1">
+        <div className="relative group">
+          <h3 
+            className="font-[700] text-[20px] text-[#282837] leading-tight line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem] lg:min-h-[3.5rem]"
+          >
+            {title}
+          </h3>
+          <div className="absolute z-50 px-3 py-2 text-sm text-white bg-gray-900 rounded-lg shadow-lg whitespace-nowrap -top-2 left-1/2 transform -translate-x-1/2 -translate-y-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+            {title}
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+          </div>
+        </div>
+        <p className="text-[#6B6B6B] text-[14px] font-[400] truncate">
+          {instructor}
+        </p>
+        <div className="flex items-center flex-wrap gap-1">
+          <span className="text-[#282837] font-[700] text-[16px]">
+            {rating}
+          </span>
+          <div className="flex">
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
-                className={`w-4 h-4 ${
-                  i < Math.floor(rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                className={`w-3 h-3 sm:w-4 sm:h-4 ${
+                  i < Math.floor(rating)
+                    ? "text-yellow-400 fill-current"
+                    : "text-gray-300"
                 }`}
               />
             ))}
           </div>
-          <span className="text-gray-500 text-sm">({reviews.toLocaleString()})</span>
+          <span className="text-[#000000] text-[16px] font-[400] ">
+            ({reviews.toLocaleString()})
+          </span>
         </div>
-
-        <div className="flex items-center mb-4">
-          <span className="font-bold text-gray-900 text-xl leading-none tracking-normal" style={{ fontWeight: 700, fontSize: '20px', lineHeight: '100%', letterSpacing: '0%' }}>
+        <div className="flex items-center flex-wrap gap-2">
+          <span className="font-[700] text-[#282837] text-[20px]">
             SR {currentPrice}
           </span>
-          <span className="text-[#979292] line-through text-xl ml-2 leading-none tracking-normal" style={{ fontWeight: 400, fontSize: '20px', lineHeight: '100%', letterSpacing: '0%' }}>
+          <span className="text-[#979292] line-through text-[20px] font-[400]">
             SR {originalPrice}
           </span>
         </div>
-
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1 sm:gap-2">
           {badges.map((badge, index) => (
-            <span
+            <Badge
               key={index}
-              className={`w-[93px] h-[37px] flex items-center justify-center text-sm rounded font-bold leading-none tracking-normal ${
-                badge === 'Best seller'
-                  ? 'bg-[#FFDEDE] text-[#BF6F6F]'
-                  : 'bg-[#FFF6DE] text-[#BFA66F]'
+              className={`min-w-[70px] sm:min-w-[93px] h-[30px] sm:h-[37px] font-[700] text-[14px] ${
+                badge === "Best seller"
+                  ? "bg-[#FFDEDE] text-[#BF6F6F]"
+                  : "bg-[#FFF6DE] text-[#BFA66F]"
               }`}
-              style={{ fontWeight: 700, fontSize: '14px', lineHeight: '100%', letterSpacing: '0%' }}
             >
               {badge}
-            </span>
+            </Badge>
           ))}
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 

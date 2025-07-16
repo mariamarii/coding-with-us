@@ -31,14 +31,11 @@ export default async function RootLayout({
     'Assiut University', 'Suez Canal University', 'Minia University', 'South Valley University'
   ];
 
-  try {
     const fetchedCourses = await fetchCourses();
     courses = fetchedCourses.map((course: CourseCardProps) => course.title);
     const fetchedCategories = await fetchCategories();
     categories = fetchedCategories.map((category: CategoryFolder) => category.name);
-  } catch (err) {
-    error = "Failed to load data";
-  }
+  
 
   return (
     <html lang="en" className={`${inter.variable}`}>

@@ -1,20 +1,27 @@
 "use client";
 import React, { useState } from 'react';
 import { CategoryFolder, CourseCardProps } from '@/types/skills';
-import CourseCard from '../common/courseCard';
+import CategoryTabs from './skills/CategoryTabs';
+import CourseList from './skills/CourseList';
+import ExploreButton from './skills/ExploreButton';
 
 interface SkillsSectionProps {
   coursesByCategory: Record<string, CourseCardProps[]>;
   categories: CategoryFolder[];
+  activeCategoryIndex: number;
+  onCategoryChange: (index: number) => void;
 }
 
-const SkillsSection: React.FC<SkillsSectionProps> = ({ coursesByCategory, categories }) => {
-  const [activeCategory, setActiveCategory] = useState(0);
+// Pure component (no state)
+const SkillsSection: React.FC<SkillsSectionProps> = ({
+  coursesByCategory,
+  categories,
+  activeCategoryIndex,
+  onCategoryChange,
+}) => {
+  const currentCategoryId = categories[activeCategoryIndex]?.categoryId;
+  const currentCourses = coursesByCategory[currentCategoryId] || [];
 
-  const getCurrentCourses = (): CourseCardProps[] => {
-    return coursesByCategory[categories[activeCategory]?.categoryId] || [];
-  };
-  
   return (
     <>
       <style jsx>{`
@@ -27,7 +34,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ coursesByCategory, catego
         }
       `}</style>
 
-      <section className="py-16 bg-gray-100">
+      <section className="py-16 bg-[#F2F2F2]">
         <div className="w-[72%] mx-auto">
           <div className="text-left mb-12">
             <h2 className="border-none text-[32px] font-[700] text-[#282837]">
@@ -38,56 +45,40 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ coursesByCategory, catego
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-3 mb-12">
-            {categories.map((category, index) => (
-              <button
-                key={category.categoryId}
-                onClick={() => setActiveCategory(index)}
-                className={`flex justify-center items-center rounded-full transition-all duration-200 ${
-                  activeCategory === index
-                    ? 'bg-[#76B729] text-[#FFFFFF] shadow-lg'
-                    : 'bg-none text-[#282837] border border-gray-300 hover:bg-gray-50'
-                }`}
-                style={{
-                  minWidth: '180px',
-                  height: '67px',
-                  fontWeight: 700,
-                  fontSize: '16px',
-                  lineHeight: '100%',
-                  letterSpacing: '0%',
-                  padding: '0 16px',
-                }}
-              >
-                <div className="flex flex-col items-center">
-                  <div className="flex items-center gap-2 mb-1">
-                    <img src={category.icon} alt={`${category.name} icon`} className="w-5 h-5" />
-                    <span className="truncate">{category.name}</span>
-                  </div>
-                  <span className="text-xs opacity-75">{category.learnerCount}</span>
-                </div>
-              </button>
-            ))}
-          </div>
+          <CategoryTabs
+            categories={categories}
+            activeIndex={activeCategoryIndex}
+            onChange={onCategoryChange}
+          />
 
-          <div className="flex overflow-x-auto space-x-6 pb-4 hide-scrollbar">
-            {getCurrentCourses().length > 0 ? (
-              getCurrentCourses().map((course, index) => (
-                <CourseCard key={course.title || index} {...course} />
-              ))
-            ) : (
-              <p className="text-gray-600">No courses available for this category.</p>
-            )}
-          </div>
+          <CourseList courses={currentCourses} />
 
-          <div className="text-center mt-12">
-            <button className="inline-flex items-center px-6 py-3 border border-gray-800 rounded-lg text-gray-800 bg-none hover:bg-gray-50 transition-colors duration-200 font-bold text-base leading-none tracking-normal">
-              Explore more {categories[activeCategory]?.name.toLowerCase() || 'courses'}
-            </button>
-          </div>
+          <ExploreButton categoryName={categories[activeCategoryIndex]?.name} />
         </div>
       </section>
     </>
   );
 };
 
-export default SkillsSection;
+// Client wrapper (handles state)
+const SkillsSectionWrapper: React.FC<SkillsSectionWrapperProps> = ({
+  coursesByCategory,
+  categories,
+}) => {
+  const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
+  
+  const handleCategoryChange = (index: number) => {
+    setActiveCategoryIndex(index);
+  };
+
+  return (
+    <SkillsSection
+      coursesByCategory={coursesByCategory}
+      categories={categories}
+      activeCategoryIndex={activeCategoryIndex}
+      onCategoryChange={handleCategoryChange}
+    />
+  );
+};
+
+export default SkillsSectionWrapper;

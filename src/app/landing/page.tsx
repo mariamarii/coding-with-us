@@ -22,23 +22,12 @@ function groupCoursesByCategory(courses: CourseCardProps[]): Record<string, Cour
 
 export default async function LandingPage() {
   let categories: CategoryFolder[] = [];
-  try {
-    categories = await fetchCategories();
-    console.log('Fetched categories:', categories);
-  } catch (error) {
-    console.error('Error fetching categories:', error);
-  }
+  categories = await fetchCategories();
 
   let courses: CourseCardProps[] = [];
-  try {
     courses = await fetchCourses();
-    console.log('Fetched courses:', courses);
-  } catch (error) {
-    console.error('Error fetching courses:', error);
-  }
 
   const coursesByCategory = groupCoursesByCategory(courses);
-  console.log('Courses by category:', coursesByCategory);
 
   return (
     <div className="landing-page">
