@@ -21,7 +21,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
       <CardHeader className="p-0">
         <div className="relative w-full h-[180px] sm:h-[220px] md:h-[268px] overflow-hidden rounded-t-lg">
           <img
-            src="/course.png"
+            src={imageUrl}
             alt={title}
             className="w-full h-full object-cover"
           />

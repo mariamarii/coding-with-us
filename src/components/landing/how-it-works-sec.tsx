@@ -54,9 +54,8 @@ const HowItWorksSection: React.FC = () => {
 
         <div className="">
           {steps.map((step, index) => (
-            <div className="relative">
+            <div key={step.number} className="relative">
               <StepItem
-                key={step.number}
                 step={step}
                 isLast={index === steps.length - 1}
               />

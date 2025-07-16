@@ -47,11 +47,11 @@ const MobileMenu: React.FC<{
       >
         <div className="flex flex-col h-full">
           <div className="border-t">
-            <nav className="p-4 space-y-2">
+            <nav className="p-4 space-y-2 ">
               <Button
                 variant="ghost"
-                className={`w-full text-left text-base font-medium ${
-                  isDarkMode ? 'text-gray-400' : 'text-gray-700'
+                className={`w-full pl-0 justify-start text-left text-base font-[400] text-[20px] ${
+                  isDarkMode ? 'text-[#282837]' : 'text-gray-700'
                 }`}
                 onClick={() => handleNavClick('home')}
               >
@@ -59,8 +59,8 @@ const MobileMenu: React.FC<{
               </Button>
               <Button
                 variant="ghost"
-                className={`w-full text-left text-base font-medium ${
-                  isDarkMode ? 'text-gray-400' : 'text-gray-700'
+                className={`w-full pl-0 text-left justify-start text-base font-[400] text-[20px] ${
+                  isDarkMode ? 'text-[#282837]' : 'text-gray-700'
                 }`}
                 onClick={() => handleNavClick('about')}
               >
@@ -68,8 +68,8 @@ const MobileMenu: React.FC<{
               </Button>
               <Button
                 variant="ghost"
-                className={`w-full text-left text-base font-medium ${
-                  isDarkMode ? 'text-gray-400' : 'text-gray-700'
+                className={`w-full pl-0 text-left justify-start text-base font-[400] text-[20px]   ${
+                  isDarkMode ? 'text-[#282837]' : 'text-gray-700'
                 }`}
                 onClick={() => handleNavClick('courses')}
               >
@@ -139,6 +139,8 @@ const MobileMenu: React.FC<{
               </div>
             </div>
           </div>
+
+          
           <div className="border-t mt-auto p-4 space-y-3">
             <Button
               className="w-full bg-[#76B729] hover:bg-[#6BA524] text-white font-medium text-sm"

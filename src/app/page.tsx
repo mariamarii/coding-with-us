@@ -5,7 +5,7 @@ import { SearchSection } from '@/components/landing/search-section';
 import DesignedForPeopleSec from '@/components/landing/designed-for-people-sec';
 import HowItWorksSec from '@/components/landing/how-it-works-sec';
 import PopularTopics from '@/components/landing/popular-topics';
-import SkillsSection from '@/components/landing/skill';
+import SkillsWrapper from '@/components/landing/skills-wrapper';
 import { ReviewsSection } from '@/components/landing/reviews-section';
 import { fetchCategories } from '@/queries/categories';
 import { fetchCourses } from '@/queries/courses';
@@ -42,7 +42,7 @@ export default async function Home() {
       <main>
         <LandingSection />
         <SearchSection />
-        <SkillsSection coursesByCategory={coursesByCategory} categories={categories} />
+        <SkillsWrapper coursesByCategory={coursesByCategory} categories={categories} />
         <DesignedForPeopleSec />
         <HowItWorksSec />
         <PopularTopics categories={categories} />

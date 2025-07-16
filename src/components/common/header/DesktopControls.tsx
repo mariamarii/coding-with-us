@@ -26,6 +26,9 @@ const DesktopControls: React.FC<{
       />
     </Button>
 
+    
+
+
     {/* Language Toggle Group */}
     <ToggleGroup
   type="single"
@@ -48,29 +51,29 @@ const DesktopControls: React.FC<{
     AR
   </ToggleGroupItem>
 </ToggleGroup>
-
-    {/* Dark Mode Toggle Group */}
-    <div className="flex items-center w-[44px] h-[44px]  bg-gray-100 rounded-full justify-center">
-      <ToggleGroup
-        type="single"
-        value={isDarkMode ? 'dark' : 'light'}
-        onValueChange={handleDarkModeToggle}
-        className="border border-[#76B729] rounded-full overflow-hidden w-[24px] h-[24px] flex items-center justify-center"
+  {/* Dark Mode Toggle Group */}
+  <div className="flex items-center w-[44px] h-[44px]  bg-gray-100 rounded-full justify-center">
+    <ToggleGroup
+      type="single"
+      value={isDarkMode ? 'dark' : 'light'}
+      onValueChange={handleDarkModeToggle}
+      className="border border-[#D9D9D9] rounded-full justify-center items-center w-[24px] h-[24px] flex overflow-hidden"
+    >
+      <ToggleGroupItem
+        value="light"
+        aria-label="Light mode"
+        className="w-1/2 h-full data-[state=on]:bg-[#76B729] dark:text-white data-[state=on]:text-white text-sm font-medium flex items-center justify-center"
       >
-        <ToggleGroupItem
-          value="light"
-          aria-label="Light mode"
-          className="data-[state=on]:bg-[#76B729] data-[state=on]:text-white p-2"
-        >
-        </ToggleGroupItem>
-        <ToggleGroupItem
-          value="dark"
-          aria-label="Dark mode"
-          className="data-[state=on]:bg-[#76B729] data-[state=on]:text-white p-2"
-        >
-        </ToggleGroupItem>
-      </ToggleGroup>
+      </ToggleGroupItem>
+      <ToggleGroupItem
+        value="dark"
+        aria-label="Dark mode"
+        className="w-1/2 h-full data-[state=on]:bg-[#76B729] dark:text-white data-[state=on]:text-white text-sm font-medium flex items-center justify-center"
+      >
+      </ToggleGroupItem>
+    </ToggleGroup>
     </div>
+
 
     <Button
       className="bg-[#76B729] hover:bg-[#6BA524] text-white font-medium text-sm px-4 py-2 rounded-lg"
@@ -83,6 +86,7 @@ const DesktopControls: React.FC<{
       Join our community
     </Button>
   </div>
+
 );
 
 export default DesktopControls;

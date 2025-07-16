@@ -59,10 +59,10 @@ Next.js automatically shows `loading.tsx` when:
 ```tsx
 import { Suspense } from "react";
 import SkillsSectionSkeleton from "@/components/landing/skills-section-skeleton";
-import SkillsSection from "@/components/landing/skill";
+import SkillsWrapper from "@/components/landing/skills-wrapper";
 
 <Suspense fallback={<SkillsSectionSkeleton />}>
-  <SkillsSection coursesByCategory={data} categories={categories} />
+  <SkillsWrapper coursesByCategory={data} categories={categories} />
 </Suspense>;
 ```
 

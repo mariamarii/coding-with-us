@@ -2,10 +2,10 @@
 import React from 'react';
 import Image from 'next/image';
 
-const Logo: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => (
+const Logo: React.FC = () => (
   <div className="flex items-start cursor-pointer flex-shrink-0">
   <Image
-    src={isDarkMode ? '/logoDark.svg' : '/logo-scroll.svg'}
+    src="/logo-scroll.svg"
     alt="Logo"
     width={90}
     height={36}

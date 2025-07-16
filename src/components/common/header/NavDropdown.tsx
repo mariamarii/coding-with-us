@@ -5,7 +5,6 @@ import { NavigationPage } from '@/types/navigation';
 interface NavDropdownProps {
   page: NavigationPage;
   currentPage: NavigationPage;
-  isDarkMode: boolean;
   onClick: (page: NavigationPage) => void;
   children: React.ReactNode;
   menuContent: React.ReactNode;
@@ -14,7 +13,6 @@ interface NavDropdownProps {
 const NavDropdown: React.FC<NavDropdownProps> = ({
   page,
   currentPage,
-  isDarkMode,
   onClick,
   children,
   menuContent
@@ -28,9 +26,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({
       return `${baseClasses} text-[#76B729] border-[#76B729] font-bold`;
     }
     
-    return `${baseClasses} border-transparent ${
-      isDarkMode ? 'text-gray-400' : 'text-gray-800'
-    }`;
+    return `${baseClasses} border-transparent text-gray-800`;
   };
 
   return (

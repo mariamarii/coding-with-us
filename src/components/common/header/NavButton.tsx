@@ -5,7 +5,6 @@ import { NavigationPage } from '@/types/navigation';
 interface NavButtonProps {
   page: NavigationPage;
   currentPage: NavigationPage;
-  isDarkMode: boolean;
   onClick: (page: NavigationPage) => void;
   children: React.ReactNode;
 }
@@ -13,7 +12,6 @@ interface NavButtonProps {
 const NavButton: React.FC<NavButtonProps> = ({
   page,
   currentPage,
-  isDarkMode,
   onClick,
   children
 }) => {
@@ -26,9 +24,7 @@ const NavButton: React.FC<NavButtonProps> = ({
       return `${baseClasses} text-[#76B729] border-[#76B729] font-bold`;
     }
     
-    return `${baseClasses} border-transparent ${
-      isDarkMode ? 'text-gray-400' : 'text-gray-800'
-    }`;
+    return `${baseClasses} border-transparent text-gray-800`;
   };
 
   return (

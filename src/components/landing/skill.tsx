@@ -1,5 +1,4 @@
-"use client";
-import React, { useState } from 'react';
+import React from 'react';
 import { CategoryFolder, CourseCardProps } from '@/types/skills';
 import CategoryTabs from './skills/CategoryTabs';
 import CourseList from './skills/CourseList';
@@ -12,7 +11,6 @@ interface SkillsSectionProps {
   onCategoryChange: (index: number) => void;
 }
 
-// Pure component (no state)
 const SkillsSection: React.FC<SkillsSectionProps> = ({
   coursesByCategory,
   categories,
@@ -60,28 +58,4 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({
   );
 };
 
-// Client wrapper (handles state)
-const SkillsSectionWrapper: React.FC<{
-  coursesByCategory: Record<string, CourseCardProps[]>;
-  categories: CategoryFolder[];
-}> = ({
-  coursesByCategory,
-  categories,
-}) => {
-  const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
-  
-  const handleCategoryChange = (index: number) => {
-    setActiveCategoryIndex(index);
-  };
-
-  return (
-    <SkillsSection
-      coursesByCategory={coursesByCategory}
-      categories={categories}
-      activeCategoryIndex={activeCategoryIndex}
-      onCategoryChange={handleCategoryChange}
-    />
-  );
-};
-
-export default SkillsSectionWrapper;
+export default SkillsSection;

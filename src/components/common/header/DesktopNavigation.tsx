@@ -11,7 +11,6 @@ import UniversitiesMenuContent from './UniversitiesMenuContent';
 interface DesktopNavigationProps {
   currentPage: NavigationPage;
   handleNavClick: (page: NavigationPage) => void;
-  isDarkMode: boolean;
   courses: string[] | undefined;
   categories: string[] | undefined;
   universities: string[] | undefined;
@@ -21,7 +20,6 @@ interface DesktopNavigationProps {
 const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
   currentPage,
   handleNavClick,
-  isDarkMode,
   courses,
   categories,
   universities,
@@ -39,7 +37,6 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
             <NavButton
               page="home"
               currentPage={currentPage}
-              isDarkMode={isDarkMode}
               onClick={handleNavClick}
             >
               Home
@@ -50,7 +47,6 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
             <NavButton
               page="about"
               currentPage={currentPage}
-              isDarkMode={isDarkMode}
               onClick={handleNavClick}
             >
               About us
@@ -60,7 +56,6 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
           <NavDropdown
             page="courses"
             currentPage={currentPage}
-            isDarkMode={isDarkMode}
             onClick={handleNavClick}
             menuContent={
               <ExploreMenuContent
@@ -76,7 +71,6 @@ const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
           <NavDropdown
             page="universities"
             currentPage={currentPage}
-            isDarkMode={isDarkMode}
             onClick={handleNavClick}
             menuContent={
               <UniversitiesMenuContent

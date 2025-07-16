@@ -3,7 +3,7 @@ import AppHeader from '@/components/common/app-header';
 import AppFooter from '@/components/common/app-footer';
 import { LandingSection } from '@/components/landing/landing-section';
 import { SearchSection } from '@/components/landing/search-section';
-import SkillsSection from '@/components/landing/skill';
+import SkillsWrapper from '@/components/landing/skills-wrapper';
 import DesignedForPeopleSec from '@/components/landing/designed-for-people-sec';
 import HowItWorksSec from '@/components/landing/how-it-works-sec';
 import PopularTopics from '@/components/landing/popular-topics';
@@ -27,7 +27,7 @@ export default function LayoutWithSuspense() {
         
         {/* Skills Section with Suspense */}
         <Suspense fallback={<SkillsSectionSkeleton />}>
-          <SkillsSection 
+          <SkillsWrapper 
             coursesByCategory={{}} 
             categories={[]} 
           />

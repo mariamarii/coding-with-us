@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 const FooterAppDownload: React.FC = () => {
   return (
-    <div className="w-[90%] mx-auto max-w-7xl flex justify-end mt-8">
+    <div className="w-[90%] mx-auto max-w-7xl flex justify-end">
       <div className="flex flex-col gap-3 sm:gap-2">
         <Button variant="ghost" asChild className="p-0">
           <Link href="https://www.apple.com/app-store/" target="_blank" rel="noopener noreferrer">

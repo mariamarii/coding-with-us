@@ -28,7 +28,7 @@ const Footer: React.FC<FooterProps> = ({ courses, categories, error }) => {
   };
 
   return (
-    <footer className="bg-[#2a2a3a] text-white pt-32 pb-8">
+    <footer className="bg-[#2a2a3a] text-white pt-12 pb-8">
       <div className="w-[72%] mx-auto max-w-7xl">
         <div className="flex flex-wrap justify-between gap-12 lg:gap-0">
           <FooterLogo tagline={tagline} />

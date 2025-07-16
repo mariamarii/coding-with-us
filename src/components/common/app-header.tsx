@@ -11,8 +11,8 @@ import MobileMenu from './header/MobileMenu';
 const Header: React.FC<HeaderProps> = ({ courses, categories, error }) => {
   const [currentPage, setCurrentPage] = useState<NavigationPage>('home');
   const [selectedLanguage, setSelectedLanguage] = useState<'en' | 'ar'>('en');
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Mock universities data - you can replace this with actual data fetching
   const universities = [
@@ -36,6 +36,7 @@ const Header: React.FC<HeaderProps> = ({ courses, categories, error }) => {
     setIsDarkMode(value === 'dark');
   };
 
+
   return (
     <div className="relative">
       <div className=" sm:flex bg-[#282837] text-white px-4 py-3 text-xs justify-end gap-4">
@@ -48,11 +49,11 @@ const Header: React.FC<HeaderProps> = ({ courses, categories, error }) => {
         
       </div>
 
-      <header className={isDarkMode ? 'bg-black border-none' : 'bg-white border-none'}>
+      <header className="bg-white border-none">
         <div className=" mx-auto w-[90%]">
           <div className="flex items-center justify-between h-12 lg:h-14 w-full ">
             <div className="flex items-center">
-              <Logo isDarkMode={isDarkMode} />
+              <Logo />
               </div>
              <div className="ml-auto w-[90%] flex justify-between items-start">
 
@@ -60,7 +61,6 @@ const Header: React.FC<HeaderProps> = ({ courses, categories, error }) => {
                 <DesktopNavigation
                   currentPage={currentPage}
                   handleNavClick={handleNavClick}
-                  isDarkMode={isDarkMode}
                   courses={courses}
                   categories={categories}
                   universities={universities}
