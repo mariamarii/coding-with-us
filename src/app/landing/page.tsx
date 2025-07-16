@@ -4,6 +4,7 @@ import HowItWorksSec from '@/components/landing/how-it-works-sec';
 import LandingSection from '@/components/landing/landing-section';
 import PopularTopics from '@/components/landing/popular-topics';
 import ReviewsSection from '@/components/landing/reviews';
+import SearchSection from '@/components/landing/search-section';
 import SkillsSection from '@/components/landing/skill';
 import { fetchCategories } from '@/queries/categories';
 import { fetchCourses } from '@/queries/courses';
@@ -44,6 +45,7 @@ export default async function LandingPage() {
     <div className="landing-page">
       <main>
         <LandingSection />
+        <SearchSection />
         <DesignedForPeopleSec />
         <HowItWorksSec />
         <PopularTopics categories={categories} />

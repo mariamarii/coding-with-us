@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Aksara+Bali+Galang&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @tailwind base;
@@ -7,10 +8,16 @@
 
 :root {
   --font-inter: "Inter", sans-serif;
+   
+
   --background: #ffffff;
   --foreground: #171717;
   --green-primary: #76B729;
   --black-primary:#282837;
+  
+}
+.aksara-text {
+  font-family: "Aksara Bali Galang", sans-serif;
 }
 
 /* Prevent horizontal scroll bars */

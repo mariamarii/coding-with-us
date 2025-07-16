@@ -47,7 +47,7 @@ const LandingSection: React.FC = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-30 sm:bottom-6 xs:bottom-4 xs:gap-1">
+      <div className="absolute bottom-32 left-[14%] flex gap-2 z-30 sm:bottom-20 xs:bottom-16 xs:gap-1">
         {[0, 1, 2, 3, 4].map((index) => (
           <CarouselDot
             key={index}

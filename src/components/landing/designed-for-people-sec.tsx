@@ -24,19 +24,19 @@ const FeatureItem: React.FC<FeatureItemProps> = ({ icon, title, description }) =
 const BusyPeopleSection: React.FC = () => {
   const features = [
     {
-      icon: "/studyDesign.svg",
-      title: "Study at your own pace:",
+      icon: "/calender.svg",
+      title: "Study at your own place:",
       description: "you'll never be late for class or miss a deadline",
     },
     {
-      icon: "/learnDesign.svg",
+      icon: "/labtop.svg",
       title: "Learn anywhere any time:",
       description: "all you need is an internet connection",
     },
   ];
 
   return (
-    <section className="w-full min-h-[355px] md:min-h-auto px-3 sm:px-4 py-6 sm:py-8 md:py-10 lg:py-12 bg-[#F9F9F9] overflow-hidden">
+    <section className="w-full min-h-[200px] md:min-h-auto px-3 sm:px-4 py-6 sm:py-8 md:py-10 lg:py-12 bg-[#F9F9F9] overflow-hidden">
       <div className="max-w-full sm:max-w-[100%] md:max-w-[70%] lg:max-w-[50%] mx-auto">
         <h2 className="font-bold text-2xl border-none leading-none tracking-normal text-[#282837] mb-5 sm:mb-6 md:mb-7 lg:mb-8">
           Designed for busy People

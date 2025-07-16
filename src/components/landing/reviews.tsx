@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { reviewsProps } from '@/types/landingProps';
 
 const revies: reviewsProps[] = [
@@ -29,7 +29,7 @@ const revies: reviewsProps[] = [
     id: 4,
     name: "Emma Davis",
     role: "Student",
-    content: "The instructors are knowledgeable and passionate about teaching. They break down complex concepts into digestible pieces and provide real-world examples that make learning relevant and exciting.",
+    content: "The instructors are knowledgeable and passionate about teaching. They break down complex concepts into digestible pieces and provide real-world examples that make learning relevant and exciting. The instructors are knowledgeable and passionate about teaching. They break down complex concepts into digestible pieces and provide real-world examples that make learning relevant and exciting.",
   },
   {
     id: 5,
@@ -49,7 +49,7 @@ const ReviewsComponent: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsPerView, setCardsPerView] = useState(3);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [expandedCard, setExpandedCard] = useState<number | null>(null);
+  const [selectedReview, setSelectedReview] = useState<reviewsProps | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -77,158 +77,169 @@ const ReviewsComponent: React.FC = () => {
     if (carouselRef.current && !isTransitioning) {
       setIsTransitioning(true);
       const cardWidth = carouselRef.current.scrollWidth / revies.length;
-      
+
       carouselRef.current.scrollTo({
         left: index * cardWidth,
         behavior: 'smooth',
       });
-      
+
       setCurrentIndex(index);
-      
       setTimeout(() => setIsTransitioning(false), 400);
     }
   };
 
   const handlePrevious = () => {
     if (canGoPrevious && !isTransitioning) {
-      const newIndex = currentIndex - 1;
-      scrollToIndex(newIndex);
+      scrollToIndex(currentIndex - 1);
     }
   };
 
   const handleNext = () => {
     if (canGoNext && !isTransitioning) {
-      const newIndex = currentIndex + 1;
-      scrollToIndex(newIndex);
+      scrollToIndex(currentIndex + 1);
     }
   };
 
-  const toggleExpanded = (id: number) => {
-    setExpandedCard(expandedCard === id ? null : id);
+  const handleCardClick = (review: reviewsProps) => {
+    setSelectedReview(review);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedReview(null);
   };
 
   return (
-    <div className="w-[72%] mx-auto bg-gray-50 py-16">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-2">
-          <h3 className="text-2xl sm:text-3xl font-normal text-black leading-tight">
-            The reviews are in
-          </h3>
-        </div>
-
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold italic text-black leading-tight">
-            What Learners are saying
-          </h2>
-          
-          <div className="flex gap-2 self-end">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handlePrevious}
-              disabled={!canGoPrevious || isTransitioning}
-              className={`
-                border transition-all duration-300
-                ${canGoPrevious && !isTransitioning 
-                  ? 'border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white' 
-                  : 'border-gray-300 text-gray-300 cursor-not-allowed hover:bg-transparent hover:text-gray-300'
-                }
-              `}
-            >
-              <ChevronLeft className="w-4 h-4 mr-1" />
-              Previous
-            </Button>
-            
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleNext}
-              disabled={!canGoNext || isTransitioning}
-              className={`
-                border transition-all duration-300
-                ${canGoNext && !isTransitioning 
-                  ? 'border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white' 
-                  : 'border-gray-300 text-gray-300 cursor-not-allowed hover:bg-transparent hover:text-gray-300'
-                }
-              `}
-            >
-              Next
-              <ChevronRight className="w-4 h-4 ml-1" />
-            </Button>
+    <section className="w-full bg-gray-50 py-16 mx-auto relative">
+      <div className="w-[72%] mx-auto">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-2">
+            <h3 className="text-2xl sm:text-3xl font-normal text-[#868686] leading-tight">
+              The reviews are in
+            </h3>
           </div>
-        </div>
 
-        <div 
-          ref={carouselRef}
-          className="flex gap-5 overflow-x-auto scroll-smooth py-2 scrollbar-hide"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
-          {revies.map((testimonial) => (
-            <Card 
-              key={testimonial.id}
-              className={`
-                min-w-[280px] sm:min-w-[320px] lg:min-w-[350px] max-w-[400px]
-                bg-white border border-gray-300 shadow-sm
-                transition-all duration-300 ease-in-out
-                hover:shadow-lg hover:-translate-y-1
-                ${isTransitioning ? 'opacity-70 pointer-events-none' : ''}
-              `}
-            >
-              <CardContent className="p-6 flex flex-col h-full min-h-[200px]">
-                <div className="text-4xl sm:text-5xl font-normal italic text-black mb-4 leading-none">
-                  "
-                </div>
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold italic text-[#1A1A1A] leading-tight">
+              What Learners are saying
+            </h2>
 
-                <div 
-                  className={`
-                    flex-1 text-lg sm:text-xl text-black leading-tight cursor-pointer
-                    border-b border-gray-300 pb-4 mb-4
-                    transition-all duration-400 ease-in-out
-                    ${expandedCard === testimonial.id 
-                      ? 'line-clamp-none' 
-                      : 'line-clamp-4'
-                    }
-                  `}
-                  onClick={() => toggleExpanded(testimonial.id)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      toggleExpanded(testimonial.id);
-                    }
-                  }}
-                  tabIndex={0}
-                  role="button"
-                  aria-label="Click to expand testimonial"
-                >
-                  {testimonial.content}
-                </div>
+            <div className="flex gap-2 self-end">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handlePrevious}
+                disabled={!canGoPrevious || isTransitioning}
+                className={`
+                  border transition-all duration-300
+                  ${canGoPrevious && !isTransitioning
+                    ? 'border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white'
+                    : 'border-gray-300 text-gray-300 cursor-not-allowed'}
+                `}
+              >
+                <ChevronLeft className="w-4 h-4 mr-1" />
+                Previous
+              </Button>
 
-                <div className="flex items-center gap-3 mt-auto">
-                  <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden transition-transform duration-300 hover:scale-105">
-                    <img 
-                      src="/person.png" 
-                      alt="Avatar icon" 
-                      className="w-16 h-16 object-cover rounded-full"
-                    />
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleNext}
+                disabled={!canGoNext || isTransitioning}
+                className={`
+                  border transition-all duration-300
+                  ${canGoNext && !isTransitioning
+                    ? 'border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white'
+                    : 'border-gray-300 text-gray-300 cursor-not-allowed'}
+                `}
+              >
+                Next
+                <ChevronRight className="w-4 h-4 ml-1" />
+              </Button>
+            </div>
+          </div>
+
+          <div
+            ref={carouselRef}
+            className="flex space-x-5 overflow-x-auto scroll-smooth py-2 scrollbar-hide"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {revies.map((testimonial) => (
+              <Card
+                key={testimonial.id}
+                onClick={() => handleCardClick(testimonial)}
+                className={`
+                  min-w-[350px] sm:min-w-[350px] lg:min-w-[400px] max-w-[450px] cursor-pointer
+                  bg-white border border-gray-300 shadow-sm rounded-md
+                  transition-all duration-300 ease-in-out
+                  hover:shadow-lg hover:-translate-y-1
+                  ${isTransitioning ? 'opacity-70 pointer-events-none' : ''}
+                `}
+              >
+                <CardContent className="p-6 flex flex-col min-h-[360px]">
+                  <div className="aksara-text text-4xl sm:text-5xl font-normal italic text-black h-[10%] leading-none">
+                    ''
                   </div>
-                  
-                  <div className="flex flex-col">
-                    <div className="flex items-center gap-2">
+
+                  <div className="flex-1 text-lg sm:text-xl text-black leading-tight border-b border-gray-300 pb-4 mb-4">
+                    <div className="line-clamp-6">
+                      {testimonial.content}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 mt-auto">
+                    <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden transition-transform duration-300 hover:scale-105">
+                      <img
+                        src="/person.png"
+                        alt="Avatar icon"
+                        className="w-16 h-16 object-cover rounded-full"
+                      />
+                    </div>
+
+                    <div className="flex flex-col">
                       <h4 className="font-bold text-lg sm:text-xl text-black leading-tight">
                         {testimonial.name}
                       </h4>
+                      <p className="font-normal italic text-lg sm:text-xl text-gray-500 leading-tight">
+                        {testimonial.role}
+                      </p>
                     </div>
-                    <p className="font-medium italic text-lg sm:text-xl text-gray-500 leading-tight">
-                      {testimonial.role}
-                    </p>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Modal */}
+      {selectedReview && (
+        <div
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+          onClick={handleCloseModal}
+        >
+          <div
+            className="bg-white w-[90%] max-w-2xl p-6 rounded-lg shadow-xl relative"
+            onClick={(e) => e.stopPropagation()} // prevent click inside modal from closing it
+          >
+            <button
+              onClick={handleCloseModal}
+              className="absolute top-3 right-3 text-gray-500 hover:text-black"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            <div className="mb-4 text-black">
+              <h3 className="text-xl sm:text-2xl font-bold">{selectedReview.name}</h3>
+              <p className="italic text-gray-600">{selectedReview.role}</p>
+            </div>
+
+            <p className="text-lg leading-relaxed text-gray-800 whitespace-pre-line">
+              {selectedReview.content}
+            </p>
+          </div>
+        </div>
+      )}
+    </section>
   );
 };
 
