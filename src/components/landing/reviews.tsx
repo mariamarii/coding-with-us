@@ -108,7 +108,7 @@ const ReviewsComponent: React.FC = () => {
   };
 
   return (
-    <div className="w-full bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
+    <div className="w-[72%] mx-auto bg-gray-50 py-16">
       <div className="max-w-7xl mx-auto">
         <div className="mb-2">
           <h3 className="text-2xl sm:text-3xl font-normal text-black leading-tight">

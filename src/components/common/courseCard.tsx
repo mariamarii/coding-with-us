@@ -13,8 +13,8 @@ const CourseCard: React.FC<CourseCardProps> = ({title,
   imageUrl
 }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex-shrink-0 w-80">
-          <div className="relative w-[397.18px] h-[268px] overflow-hidden">
+    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex-shrink-0">
+          <div className="relative overflow-hidden">
       <img
         src={imageUrl}
         alt={title}

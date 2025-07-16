@@ -28,12 +28,12 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ coursesByCategory, catego
       `}</style>
 
       <section className="py-16 bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-[72%] mx-auto">
           <div className="text-left mb-12">
-            <h2 className="border-none text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="border-none text-[32px] font-[700] text-[#282837]">
               All the skills you need in one place
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl">
+            <p className="text-[20px] font-[400] text-[#75757E] max-w-full">
               From critical skills to technical topics, explore our comprehensive course categories.
             </p>
           </div>
@@ -52,7 +52,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ coursesByCategory, catego
                   minWidth: '180px',
                   height: '67px',
                   fontWeight: 700,
-                  fontSize: '14px',
+                  fontSize: '16px',
                   lineHeight: '100%',
                   letterSpacing: '0%',
                   padding: '0 16px',
