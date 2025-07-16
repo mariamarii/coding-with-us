@@ -37,9 +37,14 @@ const Header: React.FC<HeaderProps> = ({ courses, categories, error }) => {
 
   return (
     <div className="relative">
-      <div className="hidden sm:flex bg-gray-800 text-white px-4 py-1 text-xs justify-end gap-4">
-        <button className="hover:opacity-80 transition-opacity">FAQs</button>
-        <button className="hover:opacity-80 transition-opacity">Contact Us</button>
+      <div className=" sm:flex bg-[#282837] text-white px-4 py-3 text-xs justify-end gap-4">
+        <div className=" flex justify-end gap-4 w-[90%] mx-auto">
+       
+
+        <button className="hover:opacity-80 transition-opacity text-sm">FAQs</button>
+        <button className="hover:opacity-80 transition-opacity text-sm">Contact Us</button>
+        </div>
+        
       </div>
 
       <header className={isDarkMode ? 'bg-black border-none' : 'bg-white border-none'}>
