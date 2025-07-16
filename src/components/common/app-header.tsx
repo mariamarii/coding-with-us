@@ -38,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ courses, categories, error }) => {
   return (
     <div className="relative">
       <div className=" sm:flex bg-[#282837] text-white px-4 py-3 text-xs justify-end gap-4">
-        <div className=" flex justify-end gap-4 w-[90%] mx-auto">
+        <div className=" flex justify-end gap-4 w-[92%] mx-auto">
        
 
         <button className="hover:opacity-80 transition-opacity text-sm">FAQs</button>
