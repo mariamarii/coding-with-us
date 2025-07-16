@@ -32,7 +32,7 @@ const Footer: React.FC<FooterProps> = ({ courses, categories, error }) => {
   return (
     <footer className="bg-[#2a2a3a] text-white pt-12 pb-4 mt-auto w-full sm:pt-8 sm:pb-4 xs:pt-6 xs:pb-3">
       <div className="container mx-auto px-4 max-w-7xl">
-        <div className="grid grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-6 xs:gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 xs:gap-4">
           <div className="col-span-2 lg:col-span-3">
             <Image
               src="/whiteLogo.png"
@@ -46,7 +46,7 @@ const Footer: React.FC<FooterProps> = ({ courses, categories, error }) => {
               the readable content of a page when looking at its layout.
             </p>
             <p className="text-base font-normal sm:text-xs xs:mb-2">Follow us on:</p>
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               {socialLinks.map((social, index) => (
                 <Link
                   key={index}
@@ -71,7 +71,7 @@ const Footer: React.FC<FooterProps> = ({ courses, categories, error }) => {
             <h3 className="text-xl font-bold mb-4 sm:text-lg xs:text-base xs:mb-2">
               Browse Courses
             </h3>
-            <nav className="flex flex-col gap-2 sm:gap-1">
+            <nav className="flex flex-col gap-3 sm:gap-3">
               {error ? (
                 <p className="text-red-400 text-sm">{error}</p>
               ) : courses.length === 0 ? (
@@ -94,7 +94,7 @@ const Footer: React.FC<FooterProps> = ({ courses, categories, error }) => {
             <h3 className="text-xl font-bold mb-4 sm:text-lg xs:text-base xs:mb-2">
               Categories
             </h3>
-            <nav className="flex flex-col gap-2 sm:gap-1">
+            <nav className="flex flex-col gap-3 sm:gap-3">
               {error ? (
                 <p className="text-red-400 text-sm">{error}</p>
               ) : categories.length === 0 ? (
@@ -117,7 +117,7 @@ const Footer: React.FC<FooterProps> = ({ courses, categories, error }) => {
             <h3 className="text-xl font-bold mb-4 sm:text-lg xs:text-base xs:mb-2">
               Coding with us
             </h3>
-            <nav className="flex flex-col gap-2 sm:gap-1">
+            <nav className="flex flex-col gap-3 sm:gap-3">
               {codingWithUs.map((item, index) => (
                 <Link
                   key={index}
