@@ -10,6 +10,7 @@ import { ReviewsSection } from '@/components/landing/reviews-section';
 import { fetchCategories } from '@/queries/categories';
 import { fetchCourses } from '@/queries/courses';
 import { CategoryFolder, CourseCardProps } from '@/types/skills';
+import CTAWrapper from '@/components/landing/cta-wrapper';
 
 function groupCoursesByCategory(courses: CourseCardProps[]): Record<string, CourseCardProps[]> {
   return courses.reduce((acc, course) => {
@@ -47,6 +48,12 @@ export default async function Home() {
         <PopularTopics categories={categories} />
         
         <ReviewsSection />
+        <CTAWrapper 
+          title="start online learning"
+          subtitle="ENHANCE YOUR SKILLS WITH BEST ONLINE COURSES"
+          buttonText="Get Started"
+          redirectPath="/courses"
+        />
       </main>
       <AppFooter 
         courses={courseTitles} 
