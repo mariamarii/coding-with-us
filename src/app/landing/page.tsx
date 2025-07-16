@@ -6,6 +6,7 @@ import PopularTopics from '@/components/landing/popular-topics';
 import ReviewsSection from '@/components/landing/reviews';
 import SearchSection from '@/components/landing/search-section';
 import SkillsSection from '@/components/landing/skill';
+import CTAWrapper from '@/components/landing/cta-wrapper';
 import { fetchCategories } from '@/queries/categories';
 import { fetchCourses } from '@/queries/courses';
 import { CategoryFolder, CourseCardProps } from '@/types/skills';
@@ -39,6 +40,12 @@ export default async function LandingPage() {
         <HowItWorksSec />
         <PopularTopics categories={categories} />
         <SkillsSection coursesByCategory={coursesByCategory} categories={categories} />
+        <CTAWrapper 
+          title="start online learning"
+          subtitle="ENHANCE YOUR SKILLS WITH BEST ONLINE COURSES"
+          buttonText="Get Started"
+          redirectPath="/courses"
+        />
         <ReviewsSection />
       </main>
     </div>
