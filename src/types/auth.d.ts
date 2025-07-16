@@ -4,8 +4,8 @@ export type LoginData = {
 };
 
 export type SignupData = {
+  fullName: string;
   phoneNumber: string;
-  name: string;
   email: string;
   password: string;
 };
@@ -15,6 +15,12 @@ export interface LoginResponse {
   expiresIn?: number;
   tokenType?: string;
   sessionState?: string;
+}
+
+export interface AuthWrapperProps {
+  children: React.ReactNode;
+  title: string;
+  description?: string;
 }
 
 

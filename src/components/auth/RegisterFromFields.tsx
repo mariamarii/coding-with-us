@@ -10,11 +10,11 @@ type Props = {
 const RegisterFormFields = ({ register, errors }: Props) => (
   <>
     <input
-      {...register('name')}
+      {...register('fullName')}
       placeholder="Full Name"
       className="form-input"
     />
-    {errors.name && <p className="error-text">{errors.name.message}</p>}
+    {errors.fullName && <p className="error-text">{errors.fullName.message}</p>}
 
     <input
       {...register('email')}
