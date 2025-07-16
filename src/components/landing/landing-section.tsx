@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 
 interface CarouselDotProps {
@@ -17,7 +18,7 @@ const CarouselDot: React.FC<CarouselDotProps> = ({ isActive, onClick }) => (
   />
 );
 
-const LandingSection: React.FC = () => {
+export function LandingSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const handleDotClick = (index: number) => {
@@ -47,7 +48,7 @@ const LandingSection: React.FC = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-32 left-[14%] flex gap-2 z-30 sm:bottom-20 xs:bottom-16 xs:gap-1">
+      <div className="absolute bottom-16 left-[14%] flex gap-2 z-30 sm:bottom-12 xs:bottom-8 xs:gap-1">
         {[0, 1, 2, 3, 4].map((index) => (
           <CarouselDot
             key={index}
@@ -58,6 +59,4 @@ const LandingSection: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default LandingSection;
+}

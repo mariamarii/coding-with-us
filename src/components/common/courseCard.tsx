@@ -5,6 +5,7 @@ import React from "react";
 import { CourseCardProps } from "@/types/skills";
 
 const CourseCard: React.FC<CourseCardProps> = ({
+
   title,
   instructor,
   rating,

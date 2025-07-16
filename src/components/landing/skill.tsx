@@ -61,7 +61,10 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({
 };
 
 // Client wrapper (handles state)
-const SkillsSectionWrapper: React.FC<SkillsSectionWrapperProps> = ({
+const SkillsSectionWrapper: React.FC<{
+  coursesByCategory: Record<string, CourseCardProps[]>;
+  categories: CategoryFolder[];
+}> = ({
   coursesByCategory,
   categories,
 }) => {

@@ -2,13 +2,14 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { HeaderProps } from '@/types/landingProps';
+import { NavigationPage } from '@/types/navigation';
 import Logo from './header/Logo';
-import DesktopNav from './header/DesktopNavigation';
+import DesktopNavigation from './header/DesktopNavigation';
 import DesktopControls from './header/DesktopControls';
 import MobileMenu from './header/MobileMenu';
 
 const Header: React.FC<HeaderProps> = ({ courses, categories, error }) => {
-  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'courses' | 'universities'>('home');
+  const [currentPage, setCurrentPage] = useState<NavigationPage>('home');
   const [selectedLanguage, setSelectedLanguage] = useState<'en' | 'ar'>('en');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -20,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ courses, categories, error }) => {
     'Assiut University', 'Suez Canal University', 'Minia University', 'South Valley University'
   ];
 
-  const handleNavClick = (page: 'home' | 'about' | 'courses' | 'universities') => {
+  const handleNavClick = (page: NavigationPage) => {
     setCurrentPage(page);
     setMobileMenuOpen(false);
   };
@@ -56,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ courses, categories, error }) => {
              <div className="ml-auto w-[90%] flex justify-between items-start">
 
               <div className="">
-                <DesktopNav
+                <DesktopNavigation
                   currentPage={currentPage}
                   handleNavClick={handleNavClick}
                   isDarkMode={isDarkMode}

@@ -36,21 +36,21 @@ const DesktopControls: React.FC<{
   <ToggleGroupItem
     value="en"
     aria-label="English"
-    className="w-1/2 h-full data-[state=on]:bg-[#76B729] data-[state=on]:text-white text-sm font-medium flex items-center justify-center"
+    className="w-1/2 h-full data-[state=on]:bg-[#76B729] dark:text-white data-[state=on]:text-white text-sm font-medium flex items-center justify-center"
   >
     En
   </ToggleGroupItem>
   <ToggleGroupItem
     value="ar"
     aria-label="Arabic"
-    className="w-1/2 h-full data-[state=on]:bg-[#76B729] data-[state=on]:text-white text-sm font-medium flex items-center justify-center"
+    className="w-1/2 h-full data-[state=on]:bg-[#76B729] dark:text-white data-[state=on]:text-white text-sm font-medium flex items-center justify-center"
   >
     AR
   </ToggleGroupItem>
 </ToggleGroup>
 
     {/* Dark Mode Toggle Group */}
-    <div className="flex items-center w-[44px] h-[44px] bg-gray-100 rounded-full justify-center">
+    <div className="flex items-center w-[44px] h-[44px]  bg-gray-100 rounded-full justify-center">
       <ToggleGroup
         type="single"
         value={isDarkMode ? 'dark' : 'light'}

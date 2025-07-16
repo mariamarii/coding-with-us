@@ -1,32 +1,45 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { NavigationPage } from '@/types/navigation';
 
-const NavButton = ({
-  isActive,
-  children,
-  onClick,
-  isDarkMode,
-}: {
-  isActive?: boolean;
-  children: React.ReactNode;
-  onClick?: () => void;
+interface NavButtonProps {
+  page: NavigationPage;
+  currentPage: NavigationPage;
   isDarkMode: boolean;
-}) => (
-  <Button
-    variant="ghost"
-    className={cn(
-      "h-auto px-0 py-2 text-base font-normal border-b-2 border-transparent rounded-none hover:bg-transparent hover:text-[#76B729] transition-all duration-200",
-      isActive
-        ? 'text-[#76B729] border-b-2 border-[#76B729] font-bold'
-        : isDarkMode
-          ? 'text-[#BCBCBC]'
-          : 'text-[#282837]'
-    )}
-    onClick={onClick}
-  >
-    {children}
-  </Button>
-);
+  onClick: (page: NavigationPage) => void;
+  children: React.ReactNode;
+}
+
+const NavButton: React.FC<NavButtonProps> = ({
+  page,
+  currentPage,
+  isDarkMode,
+  onClick,
+  children
+}) => {
+  const isActive = currentPage === page;
+  
+  const getButtonClasses = () => {
+    const baseClasses = "text-base font-normal hover:text-[#76B729] rounded-none border-b-2";
+    
+    if (isActive) {
+      return `${baseClasses} text-[#76B729] border-[#76B729] font-bold`;
+    }
+    
+    return `${baseClasses} border-transparent ${
+      isDarkMode ? 'text-gray-400' : 'text-gray-800'
+    }`;
+  };
+
+  return (
+    <Button
+      variant="ghost"
+      className={getButtonClasses()}
+      onClick={() => onClick(page)}
+    >
+      {children}
+    </Button>
+  );
+};
 
 export default NavButton;

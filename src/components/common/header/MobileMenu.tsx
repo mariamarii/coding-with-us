@@ -5,11 +5,12 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Menu, Sun, Moon } from 'lucide-react';
 import Image from 'next/image';
+import { NavigationPage } from '@/types/navigation';
 
 const MobileMenu: React.FC<{
   isDarkMode: boolean;
   selectedLanguage: 'en' | 'ar';
-  handleNavClick: (page: 'home' | 'about' | 'explore') => void;
+  handleNavClick: (page: NavigationPage) => void;
   handleLanguageChange: (language: 'en' | 'ar') => void;
   handleDarkModeToggle: (value: string) => void;
   mobileMenuOpen: boolean;
@@ -70,7 +71,7 @@ const MobileMenu: React.FC<{
                 className={`w-full text-left text-base font-medium ${
                   isDarkMode ? 'text-gray-400' : 'text-gray-700'
                 }`}
-                onClick={() => handleNavClick('explore')}
+                onClick={() => handleNavClick('courses')}
               >
                 Explore
               </Button>
