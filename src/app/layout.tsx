@@ -24,6 +24,13 @@ export default async function RootLayout({
   let categories: string[] = [];
   let error: string | null = null;
 
+  // Mock universities data - you can replace this with actual data fetching
+  const universities = [
+    'Cairo University', 'Ain Shams University', 'Alexandria University', 'Mansoura University',
+    'Zagazig University', 'Tanta University', 'Helwan University', 'Benha University',
+    'Assiut University', 'Suez Canal University', 'Minia University', 'South Valley University'
+  ];
+
   try {
     const fetchedCourses = await fetchCourses();
     courses = fetchedCourses.map((course: CourseCardProps) => course.title);
@@ -36,7 +43,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className={`${inter.variable}`}>
       <body>
-        <AppHeader courses={courses} categories={categories} error={error} />
+        <AppHeader courses={courses} categories={categories} universities={universities} error={error} />
         {children}
         <Footer courses={courses} categories={categories} error={error} />
       </body>

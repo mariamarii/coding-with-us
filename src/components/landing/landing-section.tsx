@@ -30,8 +30,8 @@ const LandingSection: React.FC = () => {
       
       <div className="absolute inset-0 bg-gradient-to-br from-black/50 to-black/50 dark:from-black/70 dark:to-black/70 z-10" />
       
-      <div className="relative z-20 flex items-center h-full max-w-[1200px] mx-auto w-full">
-        <div className="flex-1 max-w-[800px] text-white px-8 lg:px-12 md:px-6 sm:px-4 xs:px-3  lg:max-w-[700px] md:max-w-full">
+      <div className="relative z-20 flex items-center h-full max-w-[72%] mx-auto w-full">
+        <div className="flex-1 max-w-[800px] text-white  lg:max-w-[700px] md:max-w-full">
           
           <h1 className="font-inter font-bold text-5xl leading-none tracking-normal mb-6 drop-shadow-lg lg:text-[56px] xl:text-[56px] md:text-4xl md:mb-5 sm:text-3xl sm:mb-4 xs:text-[28px] xs:mb-3 xs:leading-tight">
             <span className="text-[#C5FE81]">Self Education</span>

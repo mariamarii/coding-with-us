@@ -4,17 +4,23 @@ import { Button } from '@/components/ui/button';
 import { HeaderProps } from '@/types/landingProps';
 import Logo from './header/Logo';
 import DesktopNav from './header/DesktopNavigation';
-import SearchBar from './header/SearchBar';
 import DesktopControls from './header/DesktopControls';
 import MobileMenu from './header/MobileMenu';
 
 const Header: React.FC<HeaderProps> = ({ courses, categories, error }) => {
-  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'explore'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'courses' | 'universities'>('home');
   const [selectedLanguage, setSelectedLanguage] = useState<'en' | 'ar'>('en');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const handleNavClick = (page: 'home' | 'about' | 'explore') => {
+  // Mock universities data - you can replace this with actual data fetching
+  const universities = [
+    'Cairo University', 'Ain Shams University', 'Alexandria University', 'Mansoura University',
+    'Zagazig University', 'Tanta University', 'Helwan University', 'Benha University',
+    'Assiut University', 'Suez Canal University', 'Minia University', 'South Valley University'
+  ];
+
+  const handleNavClick = (page: 'home' | 'about' | 'courses' | 'universities') => {
     setCurrentPage(page);
     setMobileMenuOpen(false);
   };
@@ -37,19 +43,26 @@ const Header: React.FC<HeaderProps> = ({ courses, categories, error }) => {
       </div>
 
       <header className={isDarkMode ? 'bg-black border-none' : 'bg-white border-none'}>
-        <div className="px-4 lg:px-6">
-          <div className="flex items-center justify-between h-16 lg:h-20 w-full">
-            <Logo isDarkMode={isDarkMode} />
-            <DesktopNav
-              currentPage={currentPage}
-              handleNavClick={handleNavClick}
-              isDarkMode={isDarkMode}
-              courses={courses}
-              categories={categories}
-              error={error}
-            />
-            <SearchBar />
-            <div className="flex items-center gap-2 flex-shrink-0">
+        <div className=" mx-auto w-[90%]">
+          <div className="flex items-center justify-between h-12 lg:h-14 w-full ">
+            <div className="flex items-center">
+              <Logo isDarkMode={isDarkMode} />
+              </div>
+             <div className="ml-auto w-[90%] flex justify-between items-start">
+
+              <div className="">
+                <DesktopNav
+                  currentPage={currentPage}
+                  handleNavClick={handleNavClick}
+                  isDarkMode={isDarkMode}
+                  courses={courses}
+                  categories={categories}
+                  universities={universities}
+                  error={error}
+                />
+              </div>
+            
+            <div className="flex items-end gap-2 flex-shrink-0">
               <DesktopControls
                 isDarkMode={isDarkMode}
                 selectedLanguage={selectedLanguage}
@@ -65,7 +78,9 @@ const Header: React.FC<HeaderProps> = ({ courses, categories, error }) => {
                 mobileMenuOpen={mobileMenuOpen}
                 setMobileMenuOpen={setMobileMenuOpen}
               />
-            </div>
+              </div>
+              </div>
+
           </div>
         </div>
       </header>
