@@ -26,7 +26,7 @@ export default async function LandingPage() {
   categories = await fetchCategories();
 
   let courses: CourseCardProps[] = [];
-    courses = await fetchCourses();
+  courses = await fetchCourses();
 
   const coursesByCategory = groupCoursesByCategory(courses);
 
