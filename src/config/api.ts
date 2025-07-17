@@ -13,7 +13,7 @@ export const api = {
   changePassword: () => `${API_BASE_URL}/Api/V1/users/change-password`,
   changeEmail: () => `${API_BASE_URL}/Api/V1/users/change-email`,
   forgotPassword: () => `${API_BASE_URL}/Api/V1/users/forgot-password`,
-  confirmEmail: () => `${API_BASE_URL}/Api/V1/users/confirm-email`,
-
- 
+  confirmEmail: () => `${API_BASE_URL}/Api/V1/users/confirm-email`, 
+  courses: () => `${API_BASE_URL}/Api/V1/courses`,
+  categories: () => `${API_BASE_URL}/Api/V1/categories`,
 };

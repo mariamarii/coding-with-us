@@ -1,0 +1,410 @@
+/* Font imports */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Landing Container */
+.landingContainer {
+  position: relative;
+  min-height: 600px;
+  max-height: 617px;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  background-image: url('/landing-image.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.landingContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+  z-index: 1;
+}
+
+/* Content Container */
+.contentContainer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  max-width: 1200px;
+}
+
+.textContent {
+  flex: 1;
+  max-width: 800px;
+  color: white;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* Typography */
+.mainTitle {
+  font-family: 'Inter', 'Graphik Trial', Arial, sans-serif !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  font-size: 48px !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  margin-bottom: 1.5rem !important;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5) !important;
+}
+
+.selfEducationText {
+  color: #C5FE81;
+}
+
+.resourcesText {
+  color: #FFFFFF;
+}
+
+.subtitle {
+  font-family: 'Inter', 'Graphik Trial', Arial, sans-serif !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  font-size: 16px !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  color: #FFFFFF !important;
+  margin-bottom: 3rem !important;
+  opacity: 0.95 !important;
+  max-width: 600px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Button Container */
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.actionButton {
+  min-width: 140px;
+  height: 48px;
+}
+
+/* Carousel Dots */
+.carouselDots {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 3;
+}
+
+.carouselDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carouselDot:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.carouselDotActive {
+  background-color: #76B729;
+}
+
+.carouselDotActive:hover {
+  background-color: #6BA524;
+}
+
+/* Responsive Design */
+
+/* Large Desktop (1200px+) */
+@media (min-width: 1200px) {
+  .landingContainer {
+    height: 75vh;
+    max-height: 700px;
+  }
+  
+  .mainTitle {
+    font-size: 56px !important;
+  }
+  
+  .subtitle {
+    font-size: 18px !important;
+  }
+  
+  .textContent {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+/* Desktop (1024px - 1199px) */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .mainTitle {
+    font-size: 44px !important;
+  }
+  
+  .subtitle {
+    font-size: 16px !important;
+  }
+  
+  .textContent {
+    max-width: 700px;
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .landingContainer {
+    height: 65vh;
+    min-height: 500px;
+  }
+  
+  .textContent {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    /* text-align: center; */
+    max-width: 100%;
+  }
+
+  
+  
+  .mainTitle {
+    font-size: 36px !important;
+    margin-bottom: 1.2rem !important;
+  }
+  
+  .subtitle {
+    font-size: 14px !important;
+    margin-bottom: 2.5rem !important;
+    /* justify-self: center; */
+  }
+  
+  .buttonContainer {
+    /* justify-content: center; */
+    gap: 0.8rem;
+  }
+  
+  .actionButton {
+    min-width: 120px;
+    height: 44px;
+  }
+}
+
+/* Mobile Large (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .landingContainer {
+    height: 60vh;
+    min-height: 450px;
+  }
+  
+  .textContent {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+    max-width: 100%;
+  }
+  
+  .mainTitle {
+    font-size: 32px !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .subtitle {
+    font-size: 14px !important;
+    margin-bottom: 2rem !important;
+    max-width: 100% !important;
+  }
+  
+  .buttonContainer {
+    /* flex-direction: column;
+    align-items: center; */
+    justify-content: center;
+    gap: 0.8rem;
+  }
+  
+  .actionButton {
+    min-width: 200px;
+    height: 44px;
+  }
+  
+  .carouselDots {
+    bottom: 1.5rem;
+  }
+}
+
+/* Mobile Small (320px - 480px) */
+@media (max-width: 480px) {
+  .landingContainer {
+    height: 55vh;
+    min-height: 400px;
+  }
+  
+  .textContent {
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+    text-align: center;
+    max-width: 100%;
+  }
+  
+  .mainTitle {
+    font-size: 28px !important;
+    margin-bottom: 0.8rem !important;
+    line-height: 1.1 !important;
+  }
+  
+  .subtitle {
+    font-size: 12px !important;
+    margin-bottom: 1.5rem !important;
+    max-width: 100% !important;
+    line-height: 1.3 !important;
+  }
+  
+  .buttonContainer {
+    /* flex-direction: column;
+    align-items: center; */
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+  }
+  
+  .actionButton {
+    min-width: 180px;
+    height: 42px;
+    font-size: 14px;
+  }
+  
+  .carouselDots {
+    bottom: 1rem;
+    gap: 0.4rem;
+  }
+  
+  .carouselDot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Extra Small Mobile (below 320px) */
+@media (max-width: 319px) {
+  .landingContainer {
+    height: 50vh;
+    min-height: 350px;
+  }
+  
+  .textContent {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  .mainTitle {
+    font-size: 24px !important;
+    margin-bottom: 0.6rem !important;
+  }
+  
+  .subtitle {
+    font-size: 11px !important;
+    margin-bottom: 1.2rem !important;
+  }
+  
+  .buttonContainer {
+    margin-top: 1.2rem;
+  }
+  
+  .actionButton {
+    min-width: 160px;
+    height: 40px;
+    font-size: 13px;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+  .landingContainer {
+    height: 100vh;
+    min-height: 100vh;
+    max-height: none;
+  }
+  
+  .textContent {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  .mainTitle {
+    font-size: 32px !important;
+    margin-bottom: 0.8rem !important;
+  }
+  
+  .subtitle {
+    font-size: 13px !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .buttonContainer {
+    margin-top: 1rem;
+  }
+  
+  .carouselDots {
+    bottom: 0.8rem;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .landingContainer {
+    background-image: url('/landing-image.png');
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .carouselDot {
+    transition: none;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .landingContainer::before {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 100%);
+  }
+}
+
+/* Print styles */
+@media print {
+  .landingContainer {
+    background-image: none;
+    background-color: #f5f5f5;
+    color: #000;
+    height: auto;
+    min-height: auto;
+    max-height: none;
+  }
+  
+  .landingContainer::before {
+    display: none;
+  }
+  
+  .textContent {
+    color: #000;
+  }
+  
+  .selfEducationText,
+  .resourcesText,
+  .subtitle {
+    color: #000 !important;
+  }
+  
+  .carouselDots {
+    display: none;
+  }
+}
