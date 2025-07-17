@@ -2,7 +2,6 @@
 
 import { Card } from '@/components/ui/card';
 import { AuthWrapperProps } from '@/types/auth';
-import RegisterForm from '@/components/auth/RegisterForm';
 
 export function AuthWrapper({ children, title}  : AuthWrapperProps) {
   return (

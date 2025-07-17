@@ -1,15 +1,13 @@
-'use client';
-
+import { redirect } from 'next/navigation';
 import Image from 'next/image';
 import AuthChangeForm from '@/components/auth/AuthChangeForm';
-import { useSession } from 'next-auth/react';
+import { getCurrentUser } from '@/lib/session';
 
-export default function ChangePasswordPage() {
-  const { data: session, status } = useSession();
-  const token = session?.accessToken; // ✅ Correct access to token
+export default async function ChangePasswordPage() {
+  const user = await getCurrentUser();
 
-  if (status === 'loading') {
-    return <div className="flex items-center justify-center h-screen">Loading...</div>;
+  if (!user) {
+    redirect('/login');
   }
 
   return (
@@ -27,10 +25,8 @@ export default function ChangePasswordPage() {
         </div>
 
         <div className="flex flex-col justify-center w-full px-6 py-12 md:px-10">
-         
           <AuthChangeForm 
-            email={session?.user?.email ?? ''} 
-            token={token ?? ''} 
+            email={user.email ?? ''} 
           />
         </div>
       </div>

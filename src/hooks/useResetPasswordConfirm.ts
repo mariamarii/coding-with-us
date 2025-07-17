@@ -1,5 +1,6 @@
 'use client';
 
+import { toast } from 'sonner';
 import { useApiMutation } from './useApiMutation';
 import { api } from '@/config/api';
 
@@ -10,7 +11,7 @@ type ResetPasswordConfirmInput = {
 };
 
 export const useResetPasswordConfirm = () => {
-  return useApiMutation<ResetPasswordConfirmInput>({
+  const mutation = useApiMutation<ResetPasswordConfirmInput>({
     url: api.resetPasswordConfirm(),
     getBody: (data) => ({
       email: data.email,
@@ -21,7 +22,14 @@ export const useResetPasswordConfirm = () => {
       console.log('Password reset successful');
     },
     onError: (err) => {
-      console.error(' Reset password error:', err.message);
+      console.error('Reset password error:', err.message);
+      toast.error(err.message || 'Failed to reset password. Please try again.');
     },
   });
-};
+
+  return {
+    ...mutation,
+    isSuccess: mutation.isSuccess,
+    error: mutation.error,
+  };
+}; 

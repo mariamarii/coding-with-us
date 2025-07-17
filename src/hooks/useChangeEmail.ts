@@ -1,10 +1,13 @@
-
 'use client';
 
+import { toast } from 'sonner';
 import { useApiMutation } from './useApiMutation';
+import { useSessionToken } from './useSessionToken';
 import { api } from '@/config/api';
 
-export const useChangeEmail = (token: string) => {
+export const useChangeEmail = () => {
+  const token = useSessionToken();
+  
   return useApiMutation<{
     oldEmail: string;
     newEmail: string;
@@ -20,9 +23,11 @@ export const useChangeEmail = (token: string) => {
     }),
     onSuccess: () => {
       console.log('Email changed successfully');
+      toast.success('Email changed successfully!');
     },
     onError: (err) => {
       console.error('Change email error:', err.message);
+      toast.error(err.message || 'Failed to change email. Please try again.');
     },
   });
-};
+}; 

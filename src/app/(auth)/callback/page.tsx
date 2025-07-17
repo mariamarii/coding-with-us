@@ -1,32 +1,27 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useCallbackPage } from '../../../hooks/useCallbackPage';
 
-const CallbackPage = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+export default function CallbackPage() {
+  const { error } = useCallbackPage();
 
-  useEffect(() => {
-    const token = searchParams.get('token');
-    const error = searchParams.get('error');
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <h1 className="mb-4 text-2xl font-bold text-red-600">Authentication Error</h1>
+          <p className="text-gray-600">{error}</p>
+        </div>
+      </div>
+    );
+  }
 
-    if (error) {
-     
-      router.push('/?error=auth_failed');
-      return;
-    }
-
-    if (token) {
-     
-      localStorage.setItem('accessToken', token);
-      router.push('/');
-    } else {
-      router.push('/?error=auth_failed');
-    }
-  }, [router, searchParams]);
-
-  return <div className="text-center mt-10 text-lg font-medium">Processing login...</div>;
-};
-
-export default CallbackPage;
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="text-center">
+        <h1 className="mb-4 text-2xl font-bold text-green-600">Authentication Successful</h1>
+        <p className="text-gray-600">Redirecting...</p>
+      </div>
+    </div>
+  );
+}

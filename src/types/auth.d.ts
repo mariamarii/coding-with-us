@@ -1,10 +1,10 @@
-export type LoginData = {
+export interface LoginData {
   email: string;
   password: string;
-};
+}
 
 export type SignupData = {
-  fullName: string;
+  name: string;
   phoneNumber: string;
   email: string;
   password: string;
@@ -23,16 +23,22 @@ export interface AuthWrapperProps {
   description?: string;
 }
 
-
 export interface AuthUser {
   id: string;
   email: string;
   fullName: string;
 }
+
 export type LoginSuccessResponse = LoginResponse;
+
 export interface DecodedJWT {
   sub: string;
   name?: string;
   email: string;
-  [key: string]: any;
+  [key: string]: string | undefined;
+}
+
+export interface FormHandlers {
+  onBack: () => void;
+  onSuccess: () => void;
 }

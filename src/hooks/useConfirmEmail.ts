@@ -1,5 +1,6 @@
 'use client';
 
+import { toast } from 'sonner';
 import { useApiMutation } from './useApiMutation';
 import { api } from '@/config/api'; 
 
@@ -13,9 +14,11 @@ export const useConfirmEmail = () => {
     }),
     onSuccess: () => {
       console.log('Email confirmed!');
+      toast.success('Email confirmed successfully!');
     },
     onError: (err) => {
       console.error('Email confirmation failed:', err.message);
+      toast.error(err.message || 'Email confirmation failed. Please try again.');
     },
   });
-};
+}; 

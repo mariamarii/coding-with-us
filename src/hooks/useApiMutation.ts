@@ -5,13 +5,13 @@ import { useMutation } from '@tanstack/react-query';
 type UseApiMutationParams<TInput, TOutput> = {
   url: string;
   method?: 'POST' | 'PUT' | 'PATCH' | 'DELETE';
-  getBody: (data: TInput) => any;
+  getBody: (data: TInput) => Record<string, unknown>;
   getHeaders?: () => HeadersInit;
   onSuccess?: (data: TOutput, input: TInput) => void;
   onError?: (error: Error, input: TInput) => void;
 };
 
-export function useApiMutation<TInput, TOutput = any>({
+export function useApiMutation<TInput, TOutput = unknown>({
   url,
   method = 'POST',
   getBody,

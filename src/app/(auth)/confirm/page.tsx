@@ -1,7 +1,5 @@
-import  ConfirmCodeForm  from '@/components/auth/ConfirmCodeForm';
-
-
+import ConfirmCodeContainer from '@/components/auth/ConfirmCodeContainer';
 
 export default function ConfirmPage() {
-  return <ConfirmCodeForm />;
+  return <ConfirmCodeContainer />;
 }

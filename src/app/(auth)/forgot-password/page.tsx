@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 import AuthChangeForm from '@/components/auth/AuthChangeForm';
 
@@ -21,7 +19,7 @@ export default function ForgotPasswordPage() {
 
         {/* Right Form */}
         <div className="flex flex-col justify-center w-full px-6 py-12 md:px-10">
-          <AuthChangeForm email="" token="" />
+          <AuthChangeForm email="" />
         </div>
       </div>
     </div>

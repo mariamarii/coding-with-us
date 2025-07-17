@@ -1,9 +1,18 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import React from 'react';
 
-const SocialLogin = () => {
-  const router = useRouter();
+type SocialLoginProps = {
+  handleProviderClick?: (url: string) => void;
+};
+
+const SocialLogin = ({ handleProviderClick }: SocialLoginProps) => {
+  const defaultHandleProviderClick = (url: string) => {
+    window.location.href = url;
+  };
+
+  const handleClick = handleProviderClick || defaultHandleProviderClick;
+
   const providers = [
     {
       name: 'Google',
@@ -51,7 +60,7 @@ const SocialLogin = () => {
         <button
           key={provider.name}
           type="button"
-          onClick={() => router.push(provider.url)}
+          onClick={() => handleClick(provider.url)}
           className="relative flex items-center justify-center text-sm font-bold py-3 px-4 rounded-md cursor-pointer border border-[#ddd] dark:border-gray-600 w-full bg-white dark:bg-[#1e1e1e] text-[var(--black-primary)] dark:text-white hover:bg-[#f0f0f0] dark:hover:bg-[#2a2a2a] transition-colors duration-300"
         >
           <span className="absolute flex items-center justify-center left-4">

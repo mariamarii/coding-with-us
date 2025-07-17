@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 import { useApiMutation } from './useApiMutation';
 import { api } from '@/config/api';
 import { SignupData } from '@/types/auth';
@@ -15,11 +16,14 @@ export const useUserRegistration = (setCustomError?: (msg: string) => void) => {
       phoneNumber: data.phoneNumber ?? '0000000000',
     }),
     onSuccess: (_, input) => {
+      toast.success('Registration successful! Please check your email for confirmation.');
       router.push(`/confirm?email=${encodeURIComponent(input.email)}`);
     },
     onError: (err) => {
+      const errorMessage = err.message || 'Registration failed. Please try again.';
+      toast.error(errorMessage);
       if (setCustomError) {
-        setCustomError(err.message); 
+        setCustomError(errorMessage); 
       }
     },
   });
