@@ -77,7 +77,7 @@ const ChangePasswordForm = ({ email, onBack }: Props) => {
               control={form.control}
               name="oldPassword"
               render={({ field }) => (
-                <FormItem className="pb-3">
+                <FormItem className="pb-3 text-[#282837]">
                   <FormLabel>Old Password</FormLabel>
                   <FormControl>
                     <Input
@@ -97,7 +97,7 @@ const ChangePasswordForm = ({ email, onBack }: Props) => {
               name="newPassword"
               render={({ field }) => (
                 <FormItem className="pb-3">
-                  <FormLabel>New Password</FormLabel>
+                  <FormLabel className="text-[#282837]">New Password</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -116,7 +116,7 @@ const ChangePasswordForm = ({ email, onBack }: Props) => {
               name="confirmPassword"
               render={({ field }) => (
                 <FormItem className="pb-3">
-                  <FormLabel>Confirm New Password</FormLabel>
+                  <FormLabel className="text-[#282837]">Confirm New Password</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -133,7 +133,7 @@ const ChangePasswordForm = ({ email, onBack }: Props) => {
             <div className="pt-4">
               <Button
                 type="submit"
-                className="w-full bg-[#C0DE9D] hover:bg-[#76B729] text-black font-semibold py-3"
+                className="w-full bg-[#76B729] hover:bg-green-700 text-black font-semibold py-3"
                 disabled={isPending}
               >
                 {isPending ? 'Processing...' : 'Change Password'}

@@ -62,7 +62,7 @@ const ChangeEmailForm = ({ email, onBack }: Props) => {
               name="newEmail"
               render={({ field }) => (
                 <FormItem className="pb-3">
-                  <FormLabel>New Email</FormLabel>
+                  <FormLabel className="text-[#282837]">New Email</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -81,7 +81,7 @@ const ChangeEmailForm = ({ email, onBack }: Props) => {
             <div className="pt-4">
               <Button
                 type="submit"
-                className="w-full bg-[#C0DE9D] hover:bg-[#76B729] text-black font-semibold py-3"
+                className="w-full bg-[#76B729] hover:bg-green-700 text-black font-semibold py-3"
                 disabled={isPending}
               >
                 {isPending ? 'Processing...' : 'Change Email'}
