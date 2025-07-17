@@ -3,6 +3,7 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { login } from "@/queries/auth";
+import { jwtDecode } from "jwt-decode";
 
 interface ExtendedSession {
   user: {
@@ -22,12 +23,32 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
+        // Handle social login tokens
+        if (credentials?.socialToken) {
+          try {
+            // For social login, we'll use the token directly
+            // The token should already be validated by the backend
+            const decoded = jwtDecode(credentials.socialToken);
+            
+            return {
+              id: decoded.sub || decoded.id,
+              email: decoded.email,
+              name: decoded.name || decoded.email,
+              token: credentials.socialToken,
+            };
+          } catch (error) {
+            console.error('Social login token decode error:', error);
+            return null;
+          }
+        }
+
+        // Handle regular email/password login
         const user = await login(credentials!);
         if (user) {
           return {
             id: user.id,
             email: user.email,
-            fullName: user.name,
+            name: user.name,
             token: user.token,
           };
         }
