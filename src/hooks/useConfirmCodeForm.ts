@@ -54,16 +54,13 @@ export const useConfirmCodeForm = () => {
     }
   };
 
-  const handleConfirm = async () => {
+  const handleConfirm = () => {
     const secret = code.join('');
     if (secret.length < 6 || !email) return setError(true);
 
-    try {
-      mutate({ email, secret });
-      router.push('/');
-    } catch {
-      setError(true);
-    }
+    console.log('Attempting to confirm email with:', { email, secret });
+    setError(false);
+    mutate({ email, secret });
   };
 
   const handleCancel = () => {
