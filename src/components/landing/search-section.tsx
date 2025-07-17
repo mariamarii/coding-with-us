@@ -26,7 +26,7 @@ export function SearchSection() {
     <section className="w-full bg-[#F9F9F9] py-8 relative ">
       <div className="absolute inset-0 "></div>
       
-      <div className="relative z-10 max-w-6xl mx-auto px-4">
+      <div className="relative z-10 w-[72%] mx-auto px-4">
         <SearchBar 
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
@@ -290,9 +290,9 @@ function CollaborationStatement() {
 
 function UniversityLogos() {
   return (
-    <div className="flex justify-between items-center opacity-80">
+    <div className="flex overflow-x-auto space-x-8 pb-4 hide-scrollbar">
       {universities.map((university) => (
-        <div key={university.name} className="flex flex-col items-center">
+        <div key={university.name} className="flex flex-col items-center flex-shrink-0">
           <div className="w-40 h-32 rounded-lg flex items-center justify-center mb-2">
             <img 
               src={university.image} 
