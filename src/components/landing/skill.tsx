@@ -1,25 +1,12 @@
 import React from 'react';
-import { CategoryFolder, CourseCardProps } from '@/types/skills';
-import CategoryTabs from './skills/CategoryTabs';
-import CourseList from './skills/CourseList';
-import ExploreButton from './skills/ExploreButton';
+import { CourseCardProps } from '@/types/skills';
+import CourseCard from '@/components/common/courseCard';
 
 interface SkillsSectionProps {
-  coursesByCategory: Record<string, CourseCardProps[]>;
-  categories: CategoryFolder[];
-  activeCategoryIndex: number;
-  onCategoryChange: (index: number) => void;
+  courses: CourseCardProps[];
 }
 
-const SkillsSection: React.FC<SkillsSectionProps> = ({
-  coursesByCategory,
-  categories,
-  activeCategoryIndex,
-  onCategoryChange,
-}) => {
-  const currentCategoryId = categories[activeCategoryIndex]?.categoryId;
-  const currentCourses = coursesByCategory[currentCategoryId] || [];
-
+const SkillsSection: React.FC<SkillsSectionProps> = ({ courses }) => {
   return (
     <>
       <style jsx>{`
@@ -39,19 +26,19 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({
               All the skills you need in one place
             </h2>
             <p className="text-[20px] font-[400] text-[#75757E] max-w-full">
-              From critical skills to technical topics, explore our comprehensive course categories.
+              From critical skills to technical topics, explore our comprehensive course collection.
             </p>
           </div>
 
-          <CategoryTabs
-            categories={categories}
-            activeIndex={activeCategoryIndex}
-            onChange={onCategoryChange}
-          />
-
-          <CourseList courses={currentCourses} />
-
-          <ExploreButton categoryName={categories[activeCategoryIndex]?.name} />
+          <div className="flex overflow-x-auto space-x-6 pb-4 hide-scrollbar">
+            {courses.length > 0 ? (
+              courses.map((course, index) => (
+                <CourseCard key={course.title || index} {...course} />
+              ))
+            ) : (
+              <p className="text-gray-600">No courses available.</p>
+            )}
+          </div>
         </div>
       </section>
     </>

@@ -21,11 +21,11 @@ export async function fetchCourses(): Promise<CourseCardProps[]> {
       reviews: 10000,
       currentPrice: course.price,
       originalPrice: 349.99, 
-      badges: [ "Best seller","Certificate"], 
+      badges: [ "Top Rated"], 
       level: "Beginner", 
     }));
   } catch (error) {
     console.error('Error fetching courses:', error);
-    return []; // Return empty array as fallback
+    return [];
   }
 }
