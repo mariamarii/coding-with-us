@@ -1,8 +1,12 @@
-import React from 'react';
-import { Star } from 'lucide-react';
-import { CourseCardProps } from '@/types/skills';
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Star } from "lucide-react";
+import React, { useMemo } from "react";
+import { CourseCardProps } from "@/types/skills";
 
-const CourseCard: React.FC<CourseCardProps> = ({title,
+const CourseCard: React.FC<CourseCardProps> = ({
+
+  title,
   instructor,
   rating,
   reviews,
@@ -10,67 +14,84 @@ const CourseCard: React.FC<CourseCardProps> = ({title,
   originalPrice,
   badges,
   level,
-  imageUrl
+  imageUrl,
 }) => {
+  // Filter out "Best seller" from bottom badges
+  const bottomBadges = badges.filter(badge => badge !== "Best seller");
+  const hasBestSeller = badges.includes("Top Rated");
+
+  // Memoize the star rating calculation to prevent hydration issues
+  const starRating = useMemo(() => {
+    const fullStars = Math.floor(Number(rating) || 0);
+    return Array.from({ length: 5 }, (_, i) => i < fullStars);
+  }, [rating]);
+
+  // Memoize the reviews count formatting
+  const formattedReviews = useMemo(() => {
+    return (reviews || 0).toLocaleString();
+  }, [reviews]);
+
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex-shrink-0 w-80">
-          <div className="relative w-[397.18px] h-[268px] overflow-hidden">
-      <img
-        src={imageUrl}
-        alt={title}
-        className="w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-opacity-10"></div>
-    </div>
-
-      <div className="p-4">
-      <h3 className="font-bold text-gray-900 mb-2 text-xl leading-none tracking-normal line-clamp-2">
-        {title}
-      </h3>
-        
-        <p className="text-gray-600 mb-3 text-sm">{instructor}</p>
-
-        <div className="flex items-center mb-3">
-          <span className="text-yellow-500 font-bold mr-1 text-sm">{rating}</span>
-          <div className="flex mr-2">
-            {[...Array(5)].map((_, i) => (
+    <Card className="w-full bg-white max-w-sm max-w-[280px] sm:max-w-[340px] md:max-w-[300px] flex-shrink-0 flex flex-col">
+      <CardHeader className="p-0">
+        <div className="relative w-full h-[180px] sm:h-[220px] md:h-[268px] overflow-hidden rounded-t-lg">
+          <img
+            src={imageUrl}
+            alt={title}
+            className="w-full h-full object-cover"
+          />
+          {hasBestSeller && (
+            <div className="absolute top-2 right-2">
+              <Badge className="bg-[#FFDEDE] text-[#BF6F6F] font-[700] text-[12px] px-2 py-1">
+              Top Rated
+              </Badge>
+            </div>
+          )}
+        </div>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-2 p-4 flex-1">
+        <div className="relative group">
+          <h3 
+            className="font-[700] text-[20px] text-[#282837] leading-tight line-clamp-2 min-h-[2.5rem] line-clamp-2"
+          >
+            {title}
+          </h3>
+          
+        </div>
+        <p className="text-[#6B6B6B] text-[14px] font-[400] truncate">
+          {instructor}
+        </p>
+        <div className="flex items-center flex-wrap gap-1">
+          <span className="text-[#282837] font-[700] text-[16px]">
+            {rating}
+          </span>
+          <div className="flex">
+            {starRating.map((isFilled, i) => (
               <Star
                 key={i}
-                className={`w-4 h-4 ${
-                  i < Math.floor(rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                className={`w-3 h-3 sm:w-4 sm:h-4 ${
+                  isFilled
+                    ? "text-yellow-400 fill-current"
+                    : "text-gray-300"
                 }`}
               />
             ))}
           </div>
-          <span className="text-gray-500 text-sm">({reviews.toLocaleString()})</span>
+          <span className="text-[#000000] text-[16px] font-[400] ">
+            ({formattedReviews})
+          </span>
         </div>
-
-        <div className="flex items-center mb-4">
-          <span className="font-bold text-gray-900 text-xl leading-none tracking-normal" style={{ fontWeight: 700, fontSize: '20px', lineHeight: '100%', letterSpacing: '0%' }}>
+        <div className="flex items-center flex-wrap gap-2">
+          <span className="font-[700] text-[#282837] text-[20px]">
             SR {currentPrice}
           </span>
-          <span className="text-[#979292] line-through text-xl ml-2 leading-none tracking-normal" style={{ fontWeight: 400, fontSize: '20px', lineHeight: '100%', letterSpacing: '0%' }}>
+          <span className="text-[#979292] line-through text-[20px] font-[400]">
             SR {originalPrice}
           </span>
         </div>
-
-        <div className="flex flex-wrap gap-2">
-          {badges.map((badge, index) => (
-            <span
-              key={index}
-              className={`w-[93px] h-[37px] flex items-center justify-center text-sm rounded font-bold leading-none tracking-normal ${
-                badge === 'Best seller'
-                  ? 'bg-[#FFDEDE] text-[#BF6F6F]'
-                  : 'bg-[#FFF6DE] text-[#BFA66F]'
-              }`}
-              style={{ fontWeight: 700, fontSize: '14px', lineHeight: '100%', letterSpacing: '0%' }}
-            >
-              {badge}
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
+        
+      </CardContent>
+    </Card>
   );
 };
 

@@ -7,6 +7,7 @@ export interface FooterProps {
  export interface HeaderProps {
     courses: string[];
     categories: string[]; 
+    universities?: string[];
     error: string | null;
   }
 

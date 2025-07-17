@@ -85,7 +85,7 @@
   font-size: 14px !important;
   font-weight: 400 !important;
   margin-bottom: 8px;
-  word-break: break-all; /* Break long words to fit within the container */
+  word-break: break-word; /* Break long words to fit within the container */
   overflow-wrap: break-word; /* Ensure text wraps within the container */
 }
 .appStores {
