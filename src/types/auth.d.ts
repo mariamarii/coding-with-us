@@ -38,6 +38,20 @@ export interface DecodedJWT {
   [key: string]: string | undefined;
 }
 
+export interface UserProfile {
+  id: string;
+  name: string;
+  email: string;
+  emailConfirmed: boolean;
+  phoneNumber: string;
+  profileImage: string | null;
+  isLockoutEnabled: boolean;
+  lockoutEnd: string | null;
+  registrationDate: string;
+  lastLoginAt: string;
+  roles: string[];
+}
+
 export interface FormHandlers {
   onBack: () => void;
   onSuccess: () => void;

@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
 import React, { useMemo } from "react";
 import { CourseCardProps } from "@/types/skills";
+import { formatNumber, formatCurrency } from "@/lib/utils";
 
 const CourseCard: React.FC<CourseCardProps> = ({
 
@@ -16,6 +17,9 @@ const CourseCard: React.FC<CourseCardProps> = ({
   level,
   imageUrl,
 }) => {
+  // Default image fallback
+  const defaultImage = "/course.png";
+  
   // Filter out "Best seller" from bottom badges
   const bottomBadges = badges.filter(badge => badge !== "Best seller");
   const hasBestSeller = badges.includes("Top Rated");
@@ -26,9 +30,9 @@ const CourseCard: React.FC<CourseCardProps> = ({
     return Array.from({ length: 5 }, (_, i) => i < fullStars);
   }, [rating]);
 
-  // Memoize the reviews count formatting
+  // Memoize the reviews count formatting with consistent formatting
   const formattedReviews = useMemo(() => {
-    return (reviews || 0).toLocaleString();
+    return formatNumber(reviews || 0);
   }, [reviews]);
 
   return (
@@ -36,9 +40,13 @@ const CourseCard: React.FC<CourseCardProps> = ({
       <CardHeader className="p-0">
         <div className="relative w-full h-[180px] sm:h-[220px] md:h-[268px] overflow-hidden rounded-t-lg">
           <img
-            src={imageUrl}
+            src={imageUrl || defaultImage}
             alt={title}
             className="w-full h-full object-cover"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.src = defaultImage;
+            }}
           />
           {hasBestSeller && (
             <div className="absolute top-2 right-2">
@@ -83,10 +91,10 @@ const CourseCard: React.FC<CourseCardProps> = ({
         </div>
         <div className="flex items-center flex-wrap gap-2">
           <span className="font-[700] text-[#282837] text-[20px]">
-            SR {currentPrice}
+            {formatCurrency(currentPrice)}
           </span>
           <span className="text-[#979292] line-through text-[20px] font-[400]">
-            SR {originalPrice}
+            {formatCurrency(originalPrice)}
           </span>
         </div>
         

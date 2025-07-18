@@ -1,18 +1,45 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { HeaderProps } from '@/types/landingProps';
 import { NavigationPage } from '@/types/navigation';
+import { useSession, signOut } from 'next-auth/react';
+import { getCurrentUser } from '@/queries/auth';
+import { UserProfile } from '@/types/auth';
 import Logo from './header/Logo';
 import DesktopNavigation from './header/DesktopNavigation';
 import DesktopControls from './header/DesktopControls';
 import MobileMenu from './header/MobileMenu';
+import { useNavigation } from '@/hooks/useNavigation';
 
 const Header: React.FC<HeaderProps> = ({ courses, categories, error }) => {
+  const { data: session } = useSession();
+  const { navigateToLogin, navigateToSignup } = useNavigation();
   const [currentPage, setCurrentPage] = useState<NavigationPage>('home');
   const [selectedLanguage, setSelectedLanguage] = useState<'en' | 'ar'>('en');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+
+  // Fetch user profile when session is available
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      if (session?.accessToken) {
+        try {
+          const profile = await getCurrentUser(session.accessToken);
+          setUserProfile(profile);
+        } catch (error) {
+          console.error('Failed to fetch user profile:', error);
+          // Fall back to session data if API call fails
+          setUserProfile(null);
+        }
+      } else {
+        setUserProfile(null);
+      }
+    };
+
+    fetchUserProfile();
+  }, [session?.accessToken]);
 
   // Mock universities data - you can replace this with actual data fetching
   const universities = [
@@ -36,6 +63,17 @@ const Header: React.FC<HeaderProps> = ({ courses, categories, error }) => {
     setIsDarkMode(value === 'dark');
   };
 
+  const handleLoginClick = () => {
+    navigateToLogin();
+  };
+
+  const handleJoinCommunityClick = () => {
+    navigateToSignup();
+  };
+
+  const handleSignOut = () => {
+    signOut({ callbackUrl: '/' });
+  };
 
   return (
     <div className="relative">
@@ -74,6 +112,11 @@ const Header: React.FC<HeaderProps> = ({ courses, categories, error }) => {
                 selectedLanguage={selectedLanguage}
                 handleLanguageChange={handleLanguageChange}
                 handleDarkModeToggle={handleDarkModeToggle}
+                onLoginClick={handleLoginClick}
+                onJoinCommunityClick={handleJoinCommunityClick}
+                session={session}
+                userProfile={userProfile}
+                onSignOut={handleSignOut}
               />
               <MobileMenu
                 isDarkMode={isDarkMode}
@@ -83,6 +126,15 @@ const Header: React.FC<HeaderProps> = ({ courses, categories, error }) => {
                 handleDarkModeToggle={handleDarkModeToggle}
                 mobileMenuOpen={mobileMenuOpen}
                 setMobileMenuOpen={setMobileMenuOpen}
+                onLoginClick={handleLoginClick}
+                onJoinCommunityClick={handleJoinCommunityClick}
+                session={session}
+                userProfile={userProfile}
+                onSignOut={handleSignOut}
+                courses={courses}
+                categories={categories}
+                universities={universities}
+                error={error}
               />
               </div>
               </div>

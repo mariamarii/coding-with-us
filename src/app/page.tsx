@@ -28,7 +28,6 @@ export default async function Home() {
   const courses = await fetchCourses();
   const coursesByCategory = groupCoursesByCategory(courses);
 
-  // Prepare data for header and footer
   const courseTitles = courses.map(course => course.title);
   const categoryNames = categories.map(category => category.name);
 
@@ -41,7 +40,7 @@ export default async function Home() {
       />
       <main>
         <LandingSection />
-        <SearchSection />
+        <SearchSection courses={courses} />
         <SkillsWrapper coursesByCategory={coursesByCategory} categories={categories} />
         <DesignedForPeopleSec />
         <HowItWorksSec />

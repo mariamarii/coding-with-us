@@ -8,7 +8,8 @@ interface PopularTopicsProps {
 
 const PopularTopics: React.FC<PopularTopicsProps> = ({ categories }) => {
   return (
-    <div className="py-8  w-[72%] mx-auto bg-white text-decoration-none">
+    <div className='bg-white w-full'>
+      <div className="py-8  w-[72%] mx-auto bg-white text-decoration-none">
       <h2
         className="pb-6 border-none text-left text-[32px] font-[700] text-[#000000] leading-[100%] tracking-[0%]"
       >
@@ -42,6 +43,8 @@ const PopularTopics: React.FC<PopularTopicsProps> = ({ categories }) => {
         ))}
       </div>
     </div>
+    </div>
+    
   );
 };
 

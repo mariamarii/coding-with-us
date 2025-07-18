@@ -16,6 +16,7 @@ interface SearchBarProps {
   setSelectedCourse: (course: string) => void;
   setIsUniversityOpen: (open: boolean) => void;
   setIsCourseOpen: (open: boolean) => void;
+  filteredCourses: import('@/types/skills').CourseCardProps[];
 }
 
 export function SearchBar({
@@ -29,6 +30,7 @@ export function SearchBar({
   setSelectedCourse,
   setIsUniversityOpen,
   setIsCourseOpen,
+  filteredCourses,
 }: SearchBarProps) {
   return (
     <div className="bg-[#F8F8F8] rounded-md shadow-lg p-4 mb-8 w-[90%] mx-auto -mt-16 relative z-50">
@@ -36,6 +38,7 @@ export function SearchBar({
         <SearchInput 
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
+          filteredCourses={filteredCourses}
         />
 
         <div className="hidden lg:block w-px h-10 bg-gray-300 mx-2"></div>

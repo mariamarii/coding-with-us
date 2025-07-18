@@ -17,7 +17,7 @@ export function UniversityDropdownList({
       {universities.map((university) => (
         <button
           key={university.name}
-          className="w-full px-3 py-2 text-left text-sm hover:bg-gray-50 first:rounded-t-md last:rounded-b-md flex items-center gap-3"
+          className="w-full px-3 py-2 text-left text-sm hover:bg-gray-50 text-gray-800 first:rounded-t-md last:rounded-b-md flex items-center gap-3"
           onClick={() => {
             setSelectedUniversity(university);
             setIsUniversityOpen(false);
@@ -35,7 +35,7 @@ export function UniversityDropdownList({
               target.nextElementSibling?.classList.remove('hidden');
             }}
           />
-          <div className={`w-6 h-6 rounded bg-red-600 flex items-center justify-center text-white text-xs font-bold hidden`}>
+          <div className={`w-6 h-6 rounded bg-red-600 flex items-center justify-center text-gray-800 text-xs font-bold hidden`}>
             {university.name.charAt(0)}
           </div>
           {university.name}

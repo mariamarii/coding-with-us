@@ -26,12 +26,12 @@ export function CourseDropdown({
     >
       <Button
         variant="outline"
-        className="w-full h-10 justify-between border-gray-200 hover:bg-gray-50 text-sm rounded-md bg-[#F2F2F2]"
+        className="w-full h-10 text-gray-400 justify-between border-gray-200 hover:bg-gray-50 text-sm rounded-md bg-[#F2F2F2]"
         onClick={() => setIsCourseOpen(!isCourseOpen)}
       >
         <div className="flex items-center gap-2">
           <BookOpen className="w-4 h-4 text-gray-400" />
-          <span className="text-gray-700">
+          <span className="text-gray-400">
             {selectedCourse || 'Course'}
           </span>
         </div>

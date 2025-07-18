@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useNavigation } from '@/hooks/useNavigation';
 import CTASection from './CTASection';
 
 interface CTAWrapperProps {
@@ -24,7 +24,7 @@ const CTAWrapper: React.FC<CTAWrapperProps> = ({
   buttonColor = "bg-white text-green-600 hover:bg-gray-100",
   className = ""
 }) => {
-  const router = useRouter();
+  const { navigateTo } = useNavigation();
 
   const handleCTAClick = () => {
     // Add any analytics or tracking here
@@ -34,7 +34,7 @@ const CTAWrapper: React.FC<CTAWrapperProps> = ({
     // Example: gtag('event', 'click', { event_category: 'CTA', event_label: 'Landing Page CTA' });
     
     // Navigate to the specified path
-    router.push(redirectPath);
+    navigateTo(redirectPath);
   };
 
   return (

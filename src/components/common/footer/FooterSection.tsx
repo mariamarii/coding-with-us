@@ -24,7 +24,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ title, items, error }) =>
               key={index}
               variant="link"
               asChild
-              className="whitespace-normal break-words overflow-wrap-normal no-underline font-[400] text-[14px] text-[#FFFFFF] hover:text-primary p-0 h-auto  justify-start"
+              className="whitespace-normal break-words overflow-wrap-normal no-underline font-[400] text-[14px] text-[#FFFFFF] hover:text-[#76B729] p-0 h-auto  justify-start"
             >
               <Link href={item.href}>{item.label}</Link>
             </Button>

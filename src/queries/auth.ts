@@ -1,6 +1,6 @@
 // queries/auth.ts
 
-import { LoginData, LoginResponse, DecodedJWT } from "@/types/auth";
+import { LoginData, LoginResponse, DecodedJWT, UserProfile } from "@/types/auth";
 import { jwtDecode } from "jwt-decode";
 import { api } from "@/config/api";
 
@@ -36,10 +36,39 @@ export async function login(credentials: LoginData) {
     throw new Error("Invalid token payload");
   }
 
+  // Log the decoded JWT to see what fields are available
+  console.log('Decoded JWT:', decoded);
+
+  // Try to get the name from various possible fields in the JWT
+  const userName = decoded.name || decoded.fullName || decoded.firstName || decoded.lastName || 
+                   (decoded.firstName && decoded.lastName ? `${decoded.firstName} ${decoded.lastName}` : null) ||
+                   decoded.email;
+
   return {
     id: decoded.sub,
-    name: decoded.name || decoded.email,
+    name: userName,
     email: decoded.email,
     token: data.accessToken,
   };
+}
+
+export async function getCurrentUser(accessToken: string): Promise<UserProfile> {
+  if (!accessToken) {
+    throw new Error("Access token is required");
+  }
+
+  const res = await fetch(api.me(), {
+    method: "GET",
+    headers: { 
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${accessToken}`
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch user data");
+  }
+
+  const userData: UserProfile = await res.json();
+  return userData;
 }

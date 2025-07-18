@@ -5,8 +5,13 @@ import { useSearch } from '@/hooks/use-search';
 import { SearchBar } from './search/SearchBar';
 import { CollaborationStatement } from './search/CollaborationStatement';
 import { UniversityLogos } from './search/UniversityLogos';
+import CourseList from './skills/CourseList';
 
-export function SearchSection() {
+interface SearchSectionProps {
+  courses: import('@/types/skills').CourseCardProps[];
+}
+
+export function SearchSection({ courses }: SearchSectionProps) {
   const {
     searchQuery,
     selectedUniversity,
@@ -19,6 +24,13 @@ export function SearchSection() {
     setIsUniversityOpen,
     setIsCourseOpen,
   } = useSearch();
+
+  // Filter courses by search query (case-insensitive)
+  const filteredCourses = searchQuery.trim()
+    ? courses.filter(course =>
+        course.title.toLowerCase().includes(searchQuery.trim().toLowerCase())
+      )
+    : [];
 
   return (
     <section className="w-full bg-[#F9F9F9] py-8 relative ">
@@ -36,6 +48,7 @@ export function SearchSection() {
           setSelectedCourse={setSelectedCourse}
           setIsUniversityOpen={setIsUniversityOpen}
           setIsCourseOpen={setIsCourseOpen}
+          filteredCourses={filteredCourses}
         />
 
         <CollaborationStatement />

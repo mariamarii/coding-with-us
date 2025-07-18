@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import { CategoryFolder, CourseCardProps } from '@/types/skills';
 import SkillsSection from './skill';
 
@@ -12,11 +12,19 @@ const SkillsWrapper: React.FC<SkillsWrapperProps> = ({
   coursesByCategory,
   categories,
 }) => {
-  // Flatten all courses from all categories into a single array
-  const allCourses = Object.values(coursesByCategory).flat();
+  const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
+
+  const handleCategoryChange = (index: number) => {
+    setActiveCategoryIndex(index);
+  };
 
   return (
-    <SkillsSection courses={allCourses} />
+    <SkillsSection
+      coursesByCategory={coursesByCategory}
+      categories={categories}
+      activeCategoryIndex={activeCategoryIndex}
+      onCategoryChange={handleCategoryChange}
+    />
   );
 };
 

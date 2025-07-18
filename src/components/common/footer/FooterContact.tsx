@@ -14,7 +14,7 @@ const FooterContact: React.FC<FooterContactProps> = ({ address, email, phone }) 
       <h3 className="mb-4 font-bold font-[700] text-[#FFFFFF] text-[20px] text-xl sm:text-lg xs:text-base">
         Contact
       </h3>
-      <div className="space-y-1 text-muted-foreground text-sm">
+      <div className="space-y-1 font-[400] text-[14px] text-[#FFFFFF]">
         <p className="break-words overflow-wrap-normal hyphens-auto">{address}</p>
         <p className="break-words overflow-wrap-normal hyphens-auto">{email}</p>
         <p className="break-words overflow-wrap-normal hyphens-auto">{phone}</p>
