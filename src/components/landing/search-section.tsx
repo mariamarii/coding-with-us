@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useSearch } from '@/hooks/use-search';
+import { useSearchWithoutEffects } from '@/hooks/useSearchWithoutEffects';
 import { SearchBar } from './search/SearchBar';
 import { CollaborationStatement } from './search/CollaborationStatement';
 import { UniversityLogos } from './search/UniversityLogos';
@@ -14,21 +14,27 @@ interface SearchSectionProps {
 export function SearchSection({ courses }: SearchSectionProps) {
   const {
     searchQuery,
+    debouncedSearchQuery,
     selectedUniversity,
     selectedCourse,
     isUniversityOpen,
     isCourseOpen,
+    shouldSearch,
+    isTyping,
     setSearchQuery,
     setSelectedUniversity,
     setSelectedCourse,
     setIsUniversityOpen,
     setIsCourseOpen,
-  } = useSearch();
+  } = useSearchWithoutEffects({
+    delay: 500,
+    minCharacters: 3
+  });
 
-  // Filter courses by search query (case-insensitive)
-  const filteredCourses = searchQuery.trim()
+  // Filter courses by debounced search query with minimum 3 characters
+  const filteredCourses = shouldSearch
     ? courses.filter(course =>
-        course.title.toLowerCase().includes(searchQuery.trim().toLowerCase())
+        course.title.toLowerCase().includes(debouncedSearchQuery.trim().toLowerCase())
       )
     : [];
 
@@ -49,6 +55,8 @@ export function SearchSection({ courses }: SearchSectionProps) {
           setIsUniversityOpen={setIsUniversityOpen}
           setIsCourseOpen={setIsCourseOpen}
           filteredCourses={filteredCourses}
+          debouncedSearchQuery={debouncedSearchQuery}
+          isTyping={isTyping}
         />
 
         <CollaborationStatement />

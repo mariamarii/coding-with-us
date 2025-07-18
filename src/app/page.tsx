@@ -1,5 +1,3 @@
-import AppHeader from '@/components/common/app-header';
-import AppFooter from '@/components/common/app-footer';
 import { LandingSection } from '@/components/landing/landing-section';
 import { SearchSection } from '@/components/landing/search-section';
 import DesignedForPeopleSec from '@/components/landing/designed-for-people-sec';
@@ -28,16 +26,8 @@ export default async function Home() {
   const courses = await fetchCourses();
   const coursesByCategory = groupCoursesByCategory(courses);
 
-  const courseTitles = courses.map(course => course.title);
-  const categoryNames = categories.map(category => category.name);
-
   return (
     <div className="landing-page">
-      <AppHeader 
-        courses={courseTitles} 
-        categories={categoryNames} 
-        error={null} 
-      />
       <main>
         <LandingSection />
         <SearchSection courses={courses} />
@@ -54,11 +44,6 @@ export default async function Home() {
           redirectPath="/courses"
         />
       </main>
-      <AppFooter 
-        courses={courseTitles} 
-        categories={categoryNames} 
-        error={null} 
-      />
     </div>
   );
 }

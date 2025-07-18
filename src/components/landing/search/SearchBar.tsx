@@ -17,6 +17,8 @@ interface SearchBarProps {
   setIsUniversityOpen: (open: boolean) => void;
   setIsCourseOpen: (open: boolean) => void;
   filteredCourses: import('@/types/skills').CourseCardProps[];
+  debouncedSearchQuery: string;
+  isTyping: boolean;
 }
 
 export function SearchBar({
@@ -31,6 +33,8 @@ export function SearchBar({
   setIsUniversityOpen,
   setIsCourseOpen,
   filteredCourses,
+  debouncedSearchQuery,
+  isTyping,
 }: SearchBarProps) {
   return (
     <div className="bg-[#F8F8F8] rounded-md shadow-lg p-4 mb-8 w-[90%] mx-auto -mt-16 relative z-50">
@@ -39,6 +43,8 @@ export function SearchBar({
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           filteredCourses={filteredCourses}
+          debouncedSearchQuery={debouncedSearchQuery}
+          isTyping={isTyping}
         />
 
         <div className="hidden lg:block w-px h-10 bg-gray-300 mx-2"></div>

@@ -28,7 +28,7 @@ const MobileMenuFooter: React.FC<MobileMenuFooterProps> = ({
   };
 
   return (
-    <div className="border-t mt-auto p-4 justify-between flex space-y-3">
+    <div className="border-t mt-auto px-8 py-4 justify-between flex space-y-3">
       {session && userProfile ? (
         <UserProfileSection
           session={session}
