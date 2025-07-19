@@ -39,7 +39,7 @@ export interface StepItemProps {
 export interface reviewsProps {
     id: number;
     name: string;
-    role: string;
+    : string;
     content: string;
     avatar?: string;
   }

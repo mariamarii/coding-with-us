@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { signIn } from 'next-auth/react';
+import { signIn, getSession } from 'next-auth/react';
 import { useUserRegistration } from './useUserRegisteration';
 import { useUserLogin } from './useUserLogin';
 import { SignupData } from '@/types/auth';
 import { LoginFormValues, SignupFormValues } from '@/types/auth-forms';
+import { getCurrentUser } from '@/queries/auth';
+import { userProfileCache } from '@/utils/userProfileCache';
 
 type Mode = 'login' | 'signup';
 
@@ -45,7 +47,31 @@ export const useRegisterForm = (mode: Mode) => {
         });
 
         if (result?.ok) {
-          router.push('/');
+          // Clear any existing cache to force fresh fetch
+          userProfileCache.clearProfile();
+          
+          // Fetch user profile to check role
+          try {
+            const session = await getSession();
+            if (session?.accessToken) {
+              const userProfile = await getCurrentUser(session.accessToken);
+              // Cache the fresh profile
+              userProfileCache.setProfile(userProfile);
+              
+              if (userProfile?.roles?.includes('User')) {
+                router.push('/mycourses');
+              } else {
+                router.push('/');
+              }
+            } else {
+              // Fallback to home page if no access token
+              router.push('/');
+            }
+          } catch (error) {
+            console.error('Error fetching user profile:', error);
+            // Fallback to home page if profile fetch fails
+            router.push('/');
+          }
           setLoginAttempts(0);
         } else {
           const newAttempts = loginAttempts + 1;
