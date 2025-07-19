@@ -58,9 +58,9 @@ export const useRegisterForm = (mode: Mode) => {
               // Cache the fresh profile
               userProfileCache.setProfile(userProfile);
               
-              if (userProfile?.roles?.includes('User')) {
-                router.push('/mycourses');
-              } else {
+                          if (userProfile?.roles?.includes('User')) {
+              router.push('/user-home');
+            } else {
                 router.push('/');
               }
             } else {

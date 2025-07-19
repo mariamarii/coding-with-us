@@ -20,11 +20,11 @@ const motivationalMessages: MotivationalMessage[] = [
   }
 ];
 
-interface MyCoursesHeroProps {
+interface UserHomeHeroProps {
   userName?: string;
 }
 
-const MyCoursesHero: React.FC<MyCoursesHeroProps> = ({ userName = "Guest" }) => {
+const UserHomeHero: React.FC<UserHomeHeroProps> = ({ userName = "Guest" }) => {
   const { currentIndex, next, prev } = useCarousel({ 
     totalItems: motivationalMessages.length 
   });
@@ -68,4 +68,4 @@ const MyCoursesHero: React.FC<MyCoursesHeroProps> = ({ userName = "Guest" }) => 
   );
 };
 
-export default MyCoursesHero; 
+export default UserHomeHero; 

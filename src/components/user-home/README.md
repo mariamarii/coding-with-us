@@ -1,4 +1,4 @@
-# MyCourses API Integration
+# User Home Page API Integration
 
 This document explains how the recommended and top sold courses sections now fetch data from the API endpoint.
 

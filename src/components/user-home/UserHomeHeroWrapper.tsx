@@ -1,9 +1,9 @@
 "use client";
 import React from 'react';
-import MyCoursesHero from './MyCoursesHero';
+import UserHomeHero from './UserHomeHero';
 import { useUserProfile } from '@/hooks/useUserProfile';
 
-const MyCoursesHeroWrapper: React.FC = () => {
+const UserHomeHeroWrapper: React.FC = () => {
   const { userProfile, session, isLoading, isAuthenticated } = useUserProfile();
   
   // Show loading state while session is loading to prevent hydration mismatch
@@ -22,7 +22,7 @@ const MyCoursesHeroWrapper: React.FC = () => {
   // Use the user profile name if available, otherwise fall back to session name or "Guest"
   const userName = userProfile?.name || session?.user?.name || "Guest";
 
-  return <MyCoursesHero userName={userName} />;
+  return <UserHomeHero userName={userName} />;
 };
 
-export default MyCoursesHeroWrapper; 
+export default UserHomeHeroWrapper; 
