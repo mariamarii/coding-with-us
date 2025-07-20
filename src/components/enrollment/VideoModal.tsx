@@ -13,9 +13,23 @@ interface VideoModalProps {
 export function VideoModal({ isOpen, onClose, videoUrl, title }: VideoModalProps) {
   if (!isOpen) return null
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      onClose()
+    }
+  }
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
-      <div className="relative w-full max-w-4xl mx-4 bg-white rounded-lg overflow-hidden">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
+      onClick={onClose}
+      onKeyDown={handleKeyDown}
+      tabIndex={-1}
+    >
+      <div 
+        className="relative w-full max-w-4xl mx-4 bg-white rounded-lg overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex items-center justify-between p-4 border-b">
           <h3 className="text-lg font-semibold text-gray-900">{title || "Course Preview"}</h3>
           <Button
