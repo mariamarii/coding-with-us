@@ -17,7 +17,7 @@ const CalendarIntegration: React.FC<CalendarIntegrationProps> = ({
       <p className="text-sm text-[#75757E] mb-3">
         Add lesson schedules of all courses to your calendar:
       </p>
-      <div className="flex gap-3">
+      <div className="flex flex-col sm:flex-row gap-3">
         <Button
           variant="outline"
           size="sm"
@@ -41,4 +41,4 @@ const CalendarIntegration: React.FC<CalendarIntegrationProps> = ({
   );
 };
 
-export default CalendarIntegration; 
+export default CalendarIntegration;
