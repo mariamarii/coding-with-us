@@ -22,7 +22,7 @@ const courseData: CourseInfo = {
   ],
   videoPreview: {
     thumbnailUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop",
-    videoUrl: "https://www.youtube.com/watch?v=RlPNh_PBZb4"
+    videoUrl: "https://youtu.be/F321087yYy4?si=lUPCYuvSMl4CVsox"
   }
 }
 
