@@ -1,9 +1,12 @@
 import { EnrollmentPageContent } from "@/components/enrollment/EnrollmentPageContent"
+import { CourseSection } from "@/components/enrollment/CourseSection"
 import { CourseInfo } from "@/types/enrollment"
+import { FAQSection } from "@/components/enrollment/FAQSection"
 
 const courseData: CourseInfo = {
   title: "Google Data Analytics Professional Certificate",
-  description: "Get on the fast track to a career in Data Analytics. In this certificate program, you'll learn in-demand skills, and get AI training from Google experts. Learn at your own pace, no degree or experience required.",
+  description:
+    "Get on the fast track to a career in Data Analytics. In this certificate program, you'll learn in-demand skills, and get AI training from Google experts. Learn at your own pace, no degree or experience required.",
   instructor: {
     name: "Ahmed alaa",
     avatar: "A"
@@ -27,5 +30,14 @@ const courseData: CourseInfo = {
 }
 
 export default function EnrollCoursePage() {
-  return <EnrollmentPageContent courseInfo={courseData} />
+  return (
+    <>
+      <EnrollmentPageContent courseInfo={courseData} />
+      <CourseSection />
+      <CourseSection />
+      <CourseSection />
+      <FAQSection/>
+    </>
+  )
 }
+
