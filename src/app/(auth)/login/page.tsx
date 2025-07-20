@@ -1,10 +1,10 @@
-import { AuthWrapper } from '@/components/auth/AuthPageWrapper';
-import RegisterForm from '@/components/auth/RegisterForm';
+import { ModernAuthWrapper } from '@/components/auth/ModernAuthWrapper';
+import ModernLoginForm from '@/components/auth/ModernLoginForm';
 
 export default function LoginPage() {
   return (
-    <AuthWrapper title="Welcome back">
-      <RegisterForm mode="login" />
-    </AuthWrapper>
+    <ModernAuthWrapper title="Welcome back" mode="login">
+      <ModernLoginForm />
+    </ModernAuthWrapper>
   );
 }

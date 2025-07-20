@@ -28,12 +28,16 @@ export const useRegisterForm = (mode: Mode) => {
     }
 
     if (mode === 'signup') {
+      const signupFormData = data as SignupFormValues;
       // Ensure required fields are present for signup
       const signupData: SignupData = {
-        name: (data as SignupFormValues).name || '',
-        email: data.email,
-        password: data.password,
+        firstName: signupFormData.firstName,
+        lastName: signupFormData.lastName,
+        email: signupFormData.email,
+        password: signupFormData.password,
+        userType: signupFormData.userType,
         phoneNumber: '',
+        diploma: signupFormData.diploma?.[0] || undefined, // Handle file input
       };
       signupMutate(signupData);
     } else {

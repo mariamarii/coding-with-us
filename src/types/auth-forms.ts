@@ -8,7 +8,11 @@ export const loginSchema = z.object({
 
 // Signup Schema
 export const signupSchema = z.object({
-  name: z.string().min(1, 'Full name is required'),
+  userType: z.enum(['student', 'teacher'], {
+    message: 'Please select if you are a student or teacher',
+  }),
+  firstName: z.string().min(1, 'First name is required'),
+  lastName: z.string().min(1, 'Last name is required'),
   email: z.string().email('Please enter a valid email address'),
   password: z.string()
     .min(8, 'Password must be at least 8 characters')
@@ -16,6 +20,11 @@ export const signupSchema = z.object({
     .regex(/[a-z]/, 'Must contain a lowercase letter')
     .regex(/[0-9]/, 'Must contain a number')
     .regex(/[^A-Za-z0-9]/, 'Must contain a special character'),
+  confirmPassword: z.string().min(1, 'Please confirm your password'),
+  diploma: z.any().optional(), // For file upload
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
 });
 
 // Forgot Password Schema
@@ -83,9 +92,13 @@ export const loginDefaultValues: LoginFormValues = {
 };
 
 export const signupDefaultValues: SignupFormValues = {
-  name: '',
+  userType: 'student' as const,
+  firstName: '',
+  lastName: '',
   email: '',
   password: '',
+  confirmPassword: '',
+  diploma: undefined,
 };
 
 export const forgotPasswordDefaultValues: ForgotPasswordFormValues = {

@@ -4,10 +4,13 @@ export interface LoginData {
 }
 
 export type SignupData = {
-  name: string;
-  phoneNumber: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
+  userType: 'student' | 'teacher';
+  phoneNumber?: string;
+  diploma?: File;
 };
 
 export interface LoginResponse {
