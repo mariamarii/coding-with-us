@@ -1,12 +1,17 @@
-import { useState } from "react"
 import { toast } from "sonner"
+import { useEnrollmentState } from "@/hooks/useEnrollmentState"
 
 export function useEnrollment() {
-  const [couponCode, setCouponCode] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
+  const {
+    couponCode,
+    setCouponCode,
+    isLoading,
+    setIsLoading,
+    isVideoModalOpen,
+    setIsVideoModalOpen
+  } = useEnrollmentState()
 
-  const handleApplyCoupon = async (coupon: string) => {
+  const handleApplyCoupon = async () => {
     if (!couponCode.trim()) {
       toast.error("Please enter a coupon code")
       return
@@ -22,7 +27,7 @@ export function useEnrollment() {
       } else {
         toast.error("Invalid coupon code. Please try again.")
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to apply coupon. Please try again.")
     } finally {
       setIsLoading(false)
@@ -72,6 +77,6 @@ export function useEnrollment() {
     handlePreviewCourse,
     handleCloseVideoModal,
     handleEnrollNow,
-    handleAddToCart,
+    handleAddToCart
   }
 } 
