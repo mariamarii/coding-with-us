@@ -45,7 +45,7 @@ export function EnrollmentPageContent({ courseInfo }: EnrollmentPageContentProps
           </svg>
         </Card>
         
-        <Card className="w-[72%] mx-auto max-w-7xl relative z-10 border-none shadow-none bg-transparent">
+        <Card className="w-[72%] mx-auto  relative z-10 border-none shadow-none bg-transparent">
           <Card className="flex flex-col gap-8 bg-transparent border-none shadow-none lg:gap-12 xl:flex-row">
             <Card className="flex-1 space-y-8 bg-transparent border-none shadow-none xl:max-w-4xl">
               <CourseHeader courseInfo={courseInfo} />

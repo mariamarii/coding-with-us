@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 
 interface VideoPreviewProps {
   className?: string
@@ -13,9 +14,11 @@ export function VideoPreview({ className, onPreviewCourse, thumbnailUrl }: Video
       {/* Video Thumbnail */}
       <div className="flex items-center justify-center w-full h-full">
         {thumbnailUrl ? (
-          <img 
+          <Image 
             src={thumbnailUrl} 
             alt="Course preview thumbnail" 
+            width={400}
+            height={300}
             className="object-cover w-full h-full rounded-lg"
           />
         ) : (
@@ -37,9 +40,11 @@ export function VideoPreview({ className, onPreviewCourse, thumbnailUrl }: Video
           onClick={onPreviewCourse}
           className="p-0 transition-all duration-300 bg-transparent border-none hover:bg-transparent hover:opacity-75"
         >
-          <img
+          <Image
             src="/video-circle.svg"
             alt="Play video"
+            width={56}
+            height={56}
             className="transition-transform h-14 w-14 hover:scale-105"
           />
         </Button>
