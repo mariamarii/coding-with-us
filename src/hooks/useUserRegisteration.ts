@@ -10,7 +10,7 @@ export const useUserRegistration = (setCustomError?: (msg: string) => void) => {
   return useApiMutation<SignupData>({
     url: api.register(),
     getBody: (data) => ({
-      name: data.name,
+      name: `${data.firstName} ${data.lastName}`,
       email: data.email,
       password: data.password,
       phoneNumber: data.phoneNumber ?? '0000000000',
