@@ -21,6 +21,7 @@ export const authOptions: NextAuthOptions = {
       credentials: {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
+        socialToken: { label: "Social Token", type: "text" },
       },
       async authorize(credentials) {
         // Handle social login tokens
@@ -28,7 +29,7 @@ export const authOptions: NextAuthOptions = {
           try {
             // For social login, we'll use the token directly
             // The token should already be validated by the backend
-            const decoded = jwtDecode(credentials.socialToken);
+            const decoded = jwtDecode(credentials.socialToken) as any;
             
             return {
               id: decoded.sub || decoded.id,

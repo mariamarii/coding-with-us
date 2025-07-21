@@ -6,7 +6,6 @@ import { CourseCardProps } from "@/types/skills";
 import { formatNumber, formatCurrency } from "@/lib/utils";
 
 const CourseCard: React.FC<CourseCardProps> = ({
-
   title,
   instructor,
   rating,
@@ -45,26 +44,28 @@ const CourseCard: React.FC<CourseCardProps> = ({
             className="w-full h-full object-cover"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
-              target.src = defaultImage;
+              target.src = "/course.png";
             }}
           />
           {hasBestSeller && (
             <div className="absolute top-2 right-2">
               <Badge className="bg-[#FFDEDE] text-[#BF6F6F] font-[700] text-[12px] px-2 py-1">
-              Top Rated
+                Top Rated
               </Badge>
             </div>
           )}
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-2 p-4 flex-1">
-        <div className="relative group">
+        <div className="relative group h-[2.5rem]">
           <h3 
-            className="font-[700] text-[20px] text-[#282837] leading-tight line-clamp-2 min-h-[2.5rem] line-clamp-2"
+            className="font-[700] text-[20px] text-[#282837] leading-tight line-clamp-2 min-h-[2.5rem]"
           >
             {title}
           </h3>
-          
+          <div className="absolute left-0 top-[100%] z-10 hidden group-hover:block bg-[#282837] text-white text-[14px] font-[400] p-2 rounded-md shadow-lg max-w-[280px] sm:max-w-[340px] md:max-w-[300px] whitespace-normal break-words">
+            {title}
+          </div>
         </div>
         <p className="text-[#6B6B6B] text-[14px] font-[400] truncate">
           {instructor}
@@ -97,7 +98,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
             {formatCurrency(originalPrice)}
           </span>
         </div>
-        
       </CardContent>
     </Card>
   );

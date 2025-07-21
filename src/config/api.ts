@@ -16,6 +16,8 @@ export const api = {
   forgotPassword: () => `${API_BASE_URL}/Api/V1/users/forgot-password`,
   confirmEmail: () => `${API_BASE_URL}/Api/V1/users/confirm-email`, 
   courses: () => `${API_BASE_URL}/Api/V1/courses`,
+  coursesPaginated: (pageIndex: number = 1, pageSize: number = 5) => 
+    `${API_BASE_URL}/Api/V1/courses?PageIndex=${pageIndex}&PageSize=${pageSize}`,
   categories: () => `${API_BASE_URL}/Api/V1/categories`,
 };
 

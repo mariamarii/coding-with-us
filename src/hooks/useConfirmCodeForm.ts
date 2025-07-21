@@ -54,7 +54,7 @@ export const useConfirmCodeForm = () => {
     }
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     const secret = code.join('');
     if (secret.length < 6 || !email) return setError(true);
 
