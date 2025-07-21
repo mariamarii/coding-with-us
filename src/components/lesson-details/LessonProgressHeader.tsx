@@ -42,7 +42,7 @@ export function SectionProgressHeader({ progress }: SectionProgressHeaderProps) 
         <div className="flex items-center">
           <Button 
             variant="ghost" 
-            className="flex items-center space-x-1 text-sm text-primary hover:text-primary/80"
+            className="flex items-center has-[>svg]:px-0 space-x-1 text-sm text-primary hover:text-primary/80"
           >
             <Star className="w-4 h-4 text-primary" />
             <span>Leave rating</span>

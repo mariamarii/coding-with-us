@@ -1,5 +1,13 @@
 import { useState } from 'react';
 
+export interface Reply {
+  id: string;
+  userInitials: string;
+  userName: string;
+  content: string;
+  timeAgo: string;
+}
+
 export interface Question {
   id: string;
   userInitials: string;
@@ -7,6 +15,7 @@ export interface Question {
   content: string;
   lecture: string;
   timeAgo: string;
+  replies: Reply[];
 }
 
 export function useQuestions() {
@@ -24,6 +33,7 @@ export function useQuestions() {
       content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.',
       lecture: 'lecture 1.2',
       timeAgo: '13 minutes ago',
+      replies: [],
     },
     {
       id: '2',
@@ -32,6 +42,7 @@ export function useQuestions() {
       content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.',
       lecture: 'lecture 1.2',
       timeAgo: '13 minutes ago',
+      replies: [],
     },
   ]);
 
@@ -44,6 +55,7 @@ export function useQuestions() {
         content: question,
         lecture: 'lecture 1.2',
         timeAgo: 'Just now',
+        replies: [],
       };
       setQuestions([newQuestion, ...questions]);
       setQuestion('');
@@ -59,9 +71,21 @@ export function useQuestions() {
 
   const handleAddReply = (questionId: string) => {
     if (replyContent.trim()) {
-      console.log('Adding reply for question:', questionId, 'Reply:', replyContent);
+      const newReply: Reply = {
+        id: `${Date.now()}`, // Unique ID for reply
+        userInitials: 'US',
+        userName: 'User',
+        content: replyContent,
+        timeAgo: 'Just now',
+      };
+      setQuestions(questions.map(q =>
+        q.id === questionId
+          ? { ...q, replies: [...q.replies, newReply] }
+          : q
+      ));
       setReplyingQuestionId(null);
       setReplyContent('');
+      console.log('Adding reply for question:', questionId, 'Reply:', replyContent);
     }
   };
 
@@ -80,9 +104,9 @@ export function useQuestions() {
   };
 
   const handleSaveEdit = (questionId: string) => {
-    setQuestions(questions.map(q => 
-      q.id === questionId 
-        ? { ...q, content: editingContent } 
+    setQuestions(questions.map(q =>
+      q.id === questionId
+        ? { ...q, content: editingContent }
         : q
     ));
     setEditingQuestionId(null);
@@ -119,6 +143,6 @@ export function useQuestions() {
     handleEdit,
     handleSaveEdit,
     handleCancelEdit,
-    handleDelete
+    handleDelete,
   };
 }

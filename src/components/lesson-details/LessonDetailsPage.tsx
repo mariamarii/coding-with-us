@@ -94,7 +94,7 @@ export function SectionDetailsPage() {
                   <Button
                     variant="ghost"
                     onClick={toggleSidebar}
-                    className="flex items-center space-x-2"
+                    className="flex items-center space-x-2 has-[>svg]:px-0"
                   >
                     <Menu className="w-5 h-5" />
                     <span className="text-sm font-medium">Sections Navigator</span>
