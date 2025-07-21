@@ -4,6 +4,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { signIn, getSession } from 'next-auth/react';
 import { toast } from 'sonner';
+import { getCurrentUser } from '@/queries/auth';
+import { userProfileCache } from '@/utils/userProfileCache';
 
 export const useCallbackPage = () => {
   const router = useRouter();
@@ -43,8 +45,31 @@ export const useCallbackPage = () => {
             const session = await getSession();
             if (session) {
               toast.success('Social login successful!');
-              // Redirect to home or dashboard
-              router.push('/');
+              
+              // Clear any existing cache to force fresh fetch
+              userProfileCache.clearProfile();
+              
+              // Fetch user profile to check role
+              try {
+                if (session.accessToken) {
+                  const userProfile = await getCurrentUser(session.accessToken);
+                  // Cache the fresh profile
+                  userProfileCache.setProfile(userProfile);
+                  
+                  if (userProfile?.roles?.includes('User')) {
+                    router.push('/user-home');
+                  } else {
+                    router.push('/');
+                  }
+                } else {
+                  // Fallback to home page if no access token
+                  router.push('/');
+                }
+              } catch (error) {
+                console.error('Error fetching user profile:', error);
+                // Fallback to home page if profile fetch fails
+                router.push('/');
+              }
             } else {
               throw new Error('Failed to create session');
             }

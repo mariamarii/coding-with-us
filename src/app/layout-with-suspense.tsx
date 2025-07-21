@@ -23,7 +23,7 @@ export default function LayoutWithSuspense() {
       />
       <main>
         <LandingSection />
-        <SearchSection />
+        <SearchSection courses={[]} />
         
         {/* Skills Section with Suspense */}
         <Suspense fallback={<SkillsSectionSkeleton />}>

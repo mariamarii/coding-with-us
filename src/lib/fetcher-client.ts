@@ -69,7 +69,6 @@ export async function fetcher<T>(
         errorKeys: error && typeof error === 'object' ? Object.keys(error) : [],
       };
       
-      console.error('Fetcher error details:', errorDetails);
       
       // Don't throw error in development if it's a network error
       if (process.env.NODE_ENV === 'development' && isNetworkError) {

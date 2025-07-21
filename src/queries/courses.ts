@@ -3,7 +3,6 @@ import { api, USE_MOCK_DATA } from "../config/api";
 import { CourseCardProps } from "@/types/skills";
 import { Course } from "@/types/course";
 
-// Fallback data for when API is not available
 const fallbackCourses: CourseCardProps[] = [
   {
     title: "Introduction to Web Development",
@@ -104,51 +103,71 @@ const fallbackCourses: CourseCardProps[] = [
 ];
 
 export async function fetchCourses(): Promise<CourseCardProps[]> {
-  // Only use mock data if explicitly enabled
   if (USE_MOCK_DATA) {
-    console.log('[Courses] Using mock data (explicitly enabled)');
     return fallbackCourses;
   }
 
   try {
     const apiUrl = api.courses();
     console.log(`[Courses] Attempting to fetch from: ${apiUrl}`);
-    console.log(`[Courses] API Base URL: ${process.env.NEXT_PUBLIC_API_BASE_URL}`);
     
     const rawCourses = await fetcher<Course[]>(apiUrl, {}, false);
-    console.log(`[Courses] Raw response:`, rawCourses);
     
     if (!rawCourses) {
-      console.warn('No courses data received from API, using fallback data');
       return fallbackCourses;
     }
 
-    console.log(`[Courses] Successfully fetched ${rawCourses.length} courses from API`);
-    console.log(`[Courses] First course:`, rawCourses[0]);
     
     const mappedCourses = rawCourses.map((course) => ({
-      title: course.name,
+      title: course.name || course.title || "Untitled Course",
       imageUrl: course.image,
-      categoryId: course.categoryId,
+      categoryId: course.categoryId || "1",
       instructor: "Unknown Instructor",
       rating: 5,
       reviews: 10000,
-      currentPrice: course.price,
+      currentPrice: course.price || 0,
       originalPrice: 349.99, 
       badges: [ "Top Rated"], 
       level: "Beginner", 
     }));
     
-    console.log(`[Courses] Mapped courses:`, mappedCourses);
     return mappedCourses;
   } catch (error) {
-    console.error('Error fetching courses:', error);
-    console.error('Error details:', {
-      message: error instanceof Error ? error.message : String(error),
-      type: error instanceof Error ? error.constructor.name : typeof error,
-      stack: error instanceof Error ? error.stack : undefined
-    });
-    console.warn('Using fallback courses data due to API error');
     return fallbackCourses;
+  }
+}
+
+export async function fetchPaginatedCourses(pageIndex: number = 1, pageSize: number = 5): Promise<CourseCardProps[]> {
+  if (USE_MOCK_DATA) {
+    return fallbackCourses.slice(0, pageSize);
+  }
+
+  try {
+    const apiUrl = api.coursesPaginated(pageIndex, pageSize);
+    
+    const rawCourses = await fetcher<Course[]>(apiUrl, {}, false);
+    
+    if (!rawCourses) {
+      return fallbackCourses.slice(0, pageSize);
+    }
+
+    console.log(`[PaginatedCourses] Successfully fetched ${rawCourses.length} courses from API`);
+    
+    const mappedCourses = rawCourses.map((course) => ({
+      title: course.name || course.title || "Untitled Course",
+      imageUrl: course.image,
+      categoryId: course.categoryId || "1",
+      instructor: "Unknown Instructor",
+      rating: 5,
+      reviews: 10000,
+      currentPrice: course.price || 0,
+      originalPrice: 349.99, 
+      badges: ["Top Rated"], 
+      level: "Beginner", 
+    }));
+    
+    return mappedCourses;
+  } catch (error) {
+    return fallbackCourses.slice(0, pageSize);
   }
 }
