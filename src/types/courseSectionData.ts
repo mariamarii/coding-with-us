@@ -50,6 +50,22 @@ export type LessonItem = {
         lockIcon: "/lock.svg",
         isDisabled: true,
       },
+      {
+        id: "1.5",
+        title: "Welcome and Introduction",
+        duration: "15 mins",
+        icon: "/play-circle.svg",
+        lockIcon: "/lock.svg",
+        isDisabled: true,
+      },
+      {
+        id: "1.6",
+        title: "Welcome and Introduction",
+        duration: "21 mins",
+        icon: "/play-circle.svg",
+        lockIcon: "/lock.svg",
+        isDisabled: true,
+      },
     ],
   };
   

@@ -4,8 +4,11 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { TypographyH4, TypographyH6, TypographyP } from "@/components/ui/typography";
 import { courseSectionData } from "@/types/courseSectionData";
+import { useSeeMore } from "@/hooks/useSeeMore";
 
 export function CourseSection() {
+  const { visibleItems, showAll, toggle } = useSeeMore(courseSectionData.lessons, 4);
+
   return (
     <div className="bg-[#F2F2F2] py-10">
       <div className="max-w-[737.5px] mx-auto px-4 md:px-6 flex flex-col gap-6">
@@ -23,7 +26,7 @@ export function CourseSection() {
         </TypographyH6>
 
         <div className="flex flex-col">
-          {courseSectionData.lessons.map((lesson) => (
+          {visibleItems.map((lesson) => (
             <div
               key={lesson.id}
               className={`flex flex-col md:flex-row md:items-center justify-between py-3 gap-2 ${
@@ -54,14 +57,23 @@ export function CourseSection() {
           ))}
         </div>
 
-        <Button
-          variant="link"
-          size="sm"
-          className="text-[#76B729] hover:text-[#689f25] font-semibold gap-1 self-center mt-4"
-        >
-          See all lessons items
-          <Image src="/arrow-up.svg" alt="Expand" width={16} height={16} priority />
-        </Button>
+        {courseSectionData.lessons.length > 4 && (
+          <Button
+            variant="link"
+            size="sm"
+            onClick={toggle}
+            className="text-[#76B729] hover:text-[#689f25] font-semibold gap-1 self-center mt-4"
+          >
+            {showAll ? "See less" : "See all lessons items"}
+            <Image
+              src={showAll ? "/arrow-down.svg" : "/arrow-up.svg"}
+              alt="Expand"
+              width={16}
+              height={16}
+              priority
+            />
+          </Button>
+        )}
       </div>
     </div>
   );

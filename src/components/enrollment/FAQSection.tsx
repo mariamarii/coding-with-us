@@ -6,7 +6,7 @@ import { faqData } from "@/types/faqData";
 export function FAQSection() {
   return (
     <section className="w-full flex justify-center px-4 py-12 bg-white">
-      <div className="w-full max-w-[975px]">
+      <div className="w-[72%] mx-auto">
         <h2 className="text-[20px] md:text-[24px] font-semibold mb-6 text-[#282837]">
           Frequently asked questions
         </h2>
