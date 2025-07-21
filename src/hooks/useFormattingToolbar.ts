@@ -10,7 +10,9 @@ interface FormattingToolbarState {
   showLinkInput: boolean;
   showImageInput: boolean;
   linkUrl: string;
+  setLinkUrl: (url: string) => void;
   imageUrl: string;
+  setImageUrl: (url: string) => void;
   pendingSelection: Selection | null;
   applyFormatting: (format: 'bold' | 'italic' | 'link' | 'image') => void;
   insertLink: () => void;
@@ -18,7 +20,7 @@ interface FormattingToolbarState {
   cancelInput: () => void;
 }
 
-export function useFormattingToolbar(textareaRef: React.RefObject<HTMLTextAreaElement>): FormattingToolbarState {
+export function useFormattingToolbar(textareaRef: React.RefObject<HTMLTextAreaElement | null>): FormattingToolbarState {
   const [showLinkInput, setShowLinkInput] = useState(false);
   const [showImageInput, setShowImageInput] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
@@ -64,6 +66,7 @@ export function useFormattingToolbar(textareaRef: React.RefObject<HTMLTextAreaEl
             newText = newText.substring(0, start) + '*' + selectedText + '*' + newText.substring(end);
             newCursorPos = end + 2;
           } else {
+            // For italic with no selection, insert ** and place cursor in the middle
             newText = newText.substring(0, start) + '**' + newText.substring(end);
             newCursorPos = start + 1;
           }

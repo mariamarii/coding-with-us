@@ -1,107 +1,15 @@
 import { Button } from '@/components/ui/button';
 import { Bold, Italic, Link, Image, X, Check } from 'lucide-react';
-import { useState } from 'react';
+import { useFormattingToolbar } from '@/hooks/useFormattingToolbar';
 
-// FormattingToolbar hook
-const useFormattingToolbar = (textareaRef: React.RefObject<HTMLTextAreaElement>) => {
-  const [showLinkInput, setShowLinkInput] = useState(false);
-  const [showImageInput, setShowImageInput] = useState(false);
-  const [linkUrl, setLinkUrl] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-
-  const applyFormatting = (type: 'bold' | 'italic' | 'link' | 'image') => {
-    if (!textareaRef.current) return;
-
-    const textarea = textareaRef.current;
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const selectedText = textarea.value.substring(start, end);
-    let newText = textarea.value;
-
-    if (type === 'bold') {
-      newText = `${newText.substring(0, start)}**${selectedText}**${newText.substring(end)}`;
-    } else if (type === 'italic') {
-      newText = `${newText.substring(0, start)}*${selectedText}*${newText.substring(end)}`;
-    } else if (type === 'link') {
-      setShowLinkInput(true);
-      return;
-    } else if (type === 'image') {
-      setShowImageInput(true);
-      return;
-    }
-
-    textarea.value = newText;
-    textarea.focus();
-    textarea.setSelectionRange(start, start + newText.length);
-    textarea.dispatchEvent(new Event('input', { bubbles: true }));
-  };
-
-  const insertLink = () => {
-    if (!textareaRef.current || !linkUrl) return;
-
-    const textarea = textareaRef.current;
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const selectedText = textarea.value.substring(start, end) || 'Link';
-    const newText = `${textarea.value.substring(0, start)}[${selectedText}](${linkUrl})${textarea.value.substring(end)}`;
-
-    textarea.value = newText;
-    textarea.focus();
-    textarea.setSelectionRange(start, start + newText.length);
-    textarea.dispatchEvent(new Event('input', { bubbles: true }));
-    setLinkUrl('');
-    setShowLinkInput(false);
-  };
-
-  const insertImage = () => {
-    if (!textareaRef.current || !imageUrl) return;
-
-    const textarea = textareaRef.current;
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const selectedText = textarea.value.substring(start, end) || 'Image';
-    const newText = `${textarea.value.substring(0, start)}![${selectedText}](${imageUrl})${textarea.value.substring(end)}`;
-
-    textarea.value = newText;
-    textarea.focus();
-    textarea.setSelectionRange(start, start + newText.length);
-    textarea.dispatchEvent(new Event('input', { bubbles: true }));
-    setImageUrl('');
-    setShowImageInput(false);
-  };
-
-  const cancelInput = () => {
-    setLinkUrl('');
-    setImageUrl('');
-    setShowLinkInput(false);
-    setShowImageInput(false);
-    if (textareaRef.current) {
-      textareaRef.current.focus();
-    }
-  };
-
-  return {
-    showLinkInput,
-    showImageInput,
-    linkUrl,
-    setLinkUrl,
-    imageUrl,
-    setImageUrl,
-    applyFormatting,
-    insertLink,
-    insertImage,
-    cancelInput,
-  };
-};
-
-export function FormattingToolbar({ textareaRef }: { textareaRef: React.RefObject<HTMLTextAreaElement> }) {
+export function FormattingToolbar({ textareaRef }: { textareaRef: React.RefObject<HTMLTextAreaElement | null> }) {
   const {
     showLinkInput,
     showImageInput,
     linkUrl,
     setLinkUrl,
     imageUrl,
-    setEAD: setImageUrl,
+    setImageUrl,
     applyFormatting,
     insertLink,
     insertImage,

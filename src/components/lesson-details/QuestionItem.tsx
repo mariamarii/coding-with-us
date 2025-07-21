@@ -81,42 +81,46 @@ export function QuestionItem({
   handleCancelEdit,
   handleDelete
 }: QuestionItemProps) {
+  const editTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const replyTextareaRef = useRef<HTMLTextAreaElement>(null);
+
   return (
-    <div className="border-b border-gray-200 pb-4 sm:pb-6 px-4 sm:px-0">
+    <div className="px-4 pb-4 border-b border-gray-200 sm:pb-6 sm:px-0">
       <div className="flex items-start space-x-3 sm:space-x-4">
-        <Avatar className="w-8 h-8 sm:w-10 sm:h-10 bg-green-100 flex-shrink-0">
+        <Avatar className="flex-shrink-0 w-8 h-8 bg-green-100 sm:w-10 sm:h-10">
           <AvatarFallback className="text-[#76B729] font-medium text-xs sm:text-sm">
             {question.userInitials}
           </AvatarFallback>
         </Avatar>
         <div className="flex-1 min-w-0">
-          <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 text-xs sm:text-sm mb-2">
+          <div className="flex flex-col mb-2 space-y-1 text-xs sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2 sm:text-sm">
             <div className="flex items-center space-x-2">
               <a href="#" className="text-[#76B729] underline hover:text-[#91C554]">
                 {question.userName}
               </a>
-              <span className="text-gray-400 hidden sm:inline">•</span>
+              <span className="hidden text-gray-400 sm:inline">•</span>
               <span className="text-gray-900">{question.lecture}</span>
             </div>
             <div className="flex items-center space-x-2">
               <span className="text-gray-400 sm:hidden">•</span>
-              <span className="text-gray-400 hidden sm:inline">•</span>
+              <span className="hidden text-gray-400 sm:inline">•</span>
               <span className="text-gray-500">{question.timeAgo}</span>
             </div>
           </div>
           {editingQuestionId === question.id ? (
             <div className="mb-3">
-              <Card className="overflow-hidden border-1 border-gray-300 rounded-lg shadow-none">
+              <Card className="overflow-hidden border-gray-300 rounded-lg shadow-none border-1">
                 <CardContent className="p-0">
-                  <FormattingToolbar />
+                  <FormattingToolbar textareaRef={editTextareaRef} />
                   <Textarea
+                    ref={editTextareaRef}
                     value={editingContent}
                     onChange={(e) => setEditingContent(e.target.value)}
                     className="border-0 focus:ring-0 focus:outline-none p-3 text-gray-700 min-h-[100px]"
                   />
                 </CardContent>
               </Card>
-              <div className="flex items-center space-x-2 mt-3">
+              <div className="flex items-center mt-3 space-x-2">
                 <Button
                   onClick={() => handleSaveEdit(question.id)}
                   className="bg-[#76B729] hover:bg-[#91C554] text-white font-medium px-4 py-2 rounded text-sm"
@@ -127,7 +131,7 @@ export function QuestionItem({
                 <Button
                   onClick={handleCancelEdit}
                   variant="outline"
-                  className="border-gray-300 text-gray-700 hover:bg-gray-50 font-medium px-4 py-2 rounded text-sm"
+                  className="px-4 py-2 text-sm font-medium text-gray-700 border-gray-300 rounded hover:bg-gray-50"
                 >
                   Cancel
                 </Button>
@@ -142,7 +146,7 @@ export function QuestionItem({
                 variant="ghost"
                 size="sm"
                 onClick={() => handleReply(question.id)}
-                className="text-gray-900 hover:text-gray-700 text-xs sm:text-sm p-0 h-auto"
+                className="h-auto p-0 text-xs text-gray-900 hover:text-gray-700 sm:text-sm"
               >
                 Reply
               </Button>
@@ -150,10 +154,11 @@ export function QuestionItem({
           )}
           {replyingQuestionId === question.id && (
             <div className="mt-4">
-              <Card className="overflow-hidden border-1 border-gray-300 rounded-lg shadow-none">
+              <Card className="overflow-hidden border-gray-300 rounded-lg shadow-none border-1">
                 <CardContent className="p-0">
-                  <FormattingToolbar />
+                  <FormattingToolbar textareaRef={replyTextareaRef} />
                   <Textarea
+                    ref={replyTextareaRef}
                     value={replyContent}
                     onChange={(e) => setReplyContent(e.target.value)}
                     placeholder="Type your reply here"
@@ -161,7 +166,7 @@ export function QuestionItem({
                   />
                 </CardContent>
               </Card>
-              <div className="flex items-center space-x-2 mt-3">
+              <div className="flex items-center mt-3 space-x-2">
                 <Button
                   onClick={() => handleAddReply(question.id)}
                   className="bg-[#76B729] hover:bg-[#91C554] text-white font-medium px-4 py-2 rounded text-sm"
@@ -172,7 +177,7 @@ export function QuestionItem({
                 <Button
                   onClick={handleCancelReply}
                   variant="outline"
-                  className="border-gray-300 text-gray-700 hover:bg-gray-50 font-medium px-4 py-2 rounded text-sm"
+                  className="px-4 py-2 text-sm font-medium text-gray-700 border-gray-300 rounded hover:bg-gray-50"
                 >
                   Cancel
                 </Button>
@@ -183,7 +188,7 @@ export function QuestionItem({
         {editingQuestionId !== question.id && replyingQuestionId !== question.id && (
           <DropdownMenu open={openMenuId === question.id} onOpenChange={(open) => setOpenMenuId(open ? question.id : null)}>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="h-8 w-8 p-0 flex-shrink-0">
+              <Button variant="ghost" size="sm" className="flex-shrink-0 w-8 h-8 p-0">
                 <MoreVertical className="h-4 w-4 text-[#292D32]" />
               </Button>
             </DropdownMenuTrigger>
