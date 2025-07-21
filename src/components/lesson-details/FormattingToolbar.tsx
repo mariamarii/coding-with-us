@@ -1,8 +1,98 @@
-// FormattingToolbar.tsx
-import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Bold, Italic, Link, Image, X, Check } from 'lucide-react';
-import { useFormattingToolbar } from '../../hooks/useFormattingToolbar';
+import { useState } from 'react';
+
+// FormattingToolbar hook
+const useFormattingToolbar = (textareaRef: React.RefObject<HTMLTextAreaElement>) => {
+  const [showLinkInput, setShowLinkInput] = useState(false);
+  const [showImageInput, setShowImageInput] = useState(false);
+  const [linkUrl, setLinkUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+
+  const applyFormatting = (type: 'bold' | 'italic' | 'link' | 'image') => {
+    if (!textareaRef.current) return;
+
+    const textarea = textareaRef.current;
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selectedText = textarea.value.substring(start, end);
+    let newText = textarea.value;
+
+    if (type === 'bold') {
+      newText = `${newText.substring(0, start)}**${selectedText}**${newText.substring(end)}`;
+    } else if (type === 'italic') {
+      newText = `${newText.substring(0, start)}*${selectedText}*${newText.substring(end)}`;
+    } else if (type === 'link') {
+      setShowLinkInput(true);
+      return;
+    } else if (type === 'image') {
+      setShowImageInput(true);
+      return;
+    }
+
+    textarea.value = newText;
+    textarea.focus();
+    textarea.setSelectionRange(start, start + newText.length);
+    textarea.dispatchEvent(new Event('input', { bubbles: true }));
+  };
+
+  const insertLink = () => {
+    if (!textareaRef.current || !linkUrl) return;
+
+    const textarea = textareaRef.current;
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selectedText = textarea.value.substring(start, end) || 'Link';
+    const newText = `${textarea.value.substring(0, start)}[${selectedText}](${linkUrl})${textarea.value.substring(end)}`;
+
+    textarea.value = newText;
+    textarea.focus();
+    textarea.setSelectionRange(start, start + newText.length);
+    textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    setLinkUrl('');
+    setShowLinkInput(false);
+  };
+
+  const insertImage = () => {
+    if (!textareaRef.current || !imageUrl) return;
+
+    const textarea = textareaRef.current;
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selectedText = textarea.value.substring(start, end) || 'Image';
+    const newText = `${textarea.value.substring(0, start)}![${selectedText}](${imageUrl})${textarea.value.substring(end)}`;
+
+    textarea.value = newText;
+    textarea.focus();
+    textarea.setSelectionRange(start, start + newText.length);
+    textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    setImageUrl('');
+    setShowImageInput(false);
+  };
+
+  const cancelInput = () => {
+    setLinkUrl('');
+    setImageUrl('');
+    setShowLinkInput(false);
+    setShowImageInput(false);
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
+  };
+
+  return {
+    showLinkInput,
+    showImageInput,
+    linkUrl,
+    setLinkUrl,
+    imageUrl,
+    setImageUrl,
+    applyFormatting,
+    insertLink,
+    insertImage,
+    cancelInput,
+  };
+};
 
 export function FormattingToolbar({ textareaRef }: { textareaRef: React.RefObject<HTMLTextAreaElement> }) {
   const {
@@ -11,7 +101,7 @@ export function FormattingToolbar({ textareaRef }: { textareaRef: React.RefObjec
     linkUrl,
     setLinkUrl,
     imageUrl,
-    setImageUrl,
+    setEAD: setImageUrl,
     applyFormatting,
     insertLink,
     insertImage,
@@ -48,7 +138,7 @@ export function FormattingToolbar({ textareaRef }: { textareaRef: React.RefObjec
           <Link className="w-4 h-4 text-gray-500 flex-shrink-0" />
           <input
             type="text"
-            placeholder="Enter URL[](https://...)"
+            placeholder="Enter URL (https://...)"
             value={linkUrl}
             onChange={(e) => setLinkUrl(e.target.value)}
             className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -90,7 +180,7 @@ export function FormattingToolbar({ textareaRef }: { textareaRef: React.RefObjec
           <Image className="w-4 h-4 text-gray-500 flex-shrink-0" />
           <input
             type="text"
-            placeholder="Enter image URL[](https://...)"
+            placeholder="Enter image URL (https://...)"
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
             className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
