@@ -95,7 +95,7 @@ export function CourseEnrollmentCard({
 
         <div className="flex items-center">
           <span className="text-xs sm:text-sm font-bold leading-[16px] text-[#76b729]">Share</span>
-          <Button onClick={onShare} className="p-0 bg-transparent hover:bg-transparent hover:opacity-75">
+          <Button onClick={onShare} className="p-0 bg-transparent shadow-none hover:bg-transparent hover:opacity-75">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 sm:w-6 sm:h-6">
               <path d="M7.39969 6.32003L15.8897 3.49003C19.6997 2.22003 21.7697 4.30003 20.5097 8.11003L17.6797 16.6C15.7797 22.31 12.6597 22.31 10.7597 16.6L9.91969 14.08L7.39969 13.24C1.68969 11.34 1.68969 8.23003 7.39969 6.32003Z" stroke="#76B729" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M10.1094 13.6501L13.6894 10.0601" stroke="#76B729" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
