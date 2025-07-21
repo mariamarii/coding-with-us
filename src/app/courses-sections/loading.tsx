@@ -1,6 +1,6 @@
 import { Skeleton } from '@/components/ui/skeleton';
 
-export default function LessonDemoLoading() {
+export default function CoursesSectionLoading() {
   return (
     <div className="min-h-screen bg-white">
       {/* Progress Header Skeleton */}

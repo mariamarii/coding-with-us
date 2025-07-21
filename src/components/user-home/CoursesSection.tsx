@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { Course } from '@/types/course';
 import CoursesHeader from './CoursesHeader';
@@ -55,7 +56,7 @@ const CoursesSection = () => {
       image: "/course.png"
     }
   ];
-
+  
   const handleSeeAllCourses = () => {
     console.log('See all courses clicked');
   };

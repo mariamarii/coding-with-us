@@ -1,46 +1,18 @@
-"use client";
+'use client';
 import React from 'react';
 import HorizontalCoursesSection from './HorizontalCoursesSection';
-import { fetchPaginatedCourses } from '@/queries/courses';
 import { CourseCardProps } from '@/types/skills';
 
-const TopSoldCourses: React.FC = () => {
-  const [courses, setCourses] = React.useState<CourseCardProps[]>([]);
-  const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState<string | null>(null);
+interface TopSoldCoursesProps {
+  courses: CourseCardProps[];
+  error: string | null;
+}
 
-  React.useEffect(() => {
-    const loadCourses = async () => {
-      try {
-        setLoading(true);
-        const fetchedCourses = await fetchPaginatedCourses(1, 5);
-        setCourses(fetchedCourses);
-      } catch (err) {
-        setError('Failed to load top sold courses');
-        console.error('Error loading top sold courses:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadCourses();
-  }, []);
-
-  if (loading) {
-    return (
-      <HorizontalCoursesSection
-        title="Top Sold courses"
-        courses={[]}
-        backgroundColor="bg-white"
-        loading={true}
-      />
-    );
-  }
-
+const TopSoldCourses: React.FC<TopSoldCoursesProps> = ({ courses, error }) => {
   if (error) {
     return (
       <HorizontalCoursesSection
-        title="Top Sold courses"
+        title="Top Sold Courses"
         courses={[]}
         backgroundColor="bg-white"
         error={error}
@@ -50,11 +22,11 @@ const TopSoldCourses: React.FC = () => {
 
   return (
     <HorizontalCoursesSection
-      title="Top Sold courses"
+      title="Top Sold Courses"
       courses={courses}
       backgroundColor="bg-white"
     />
   );
 };
 
-export default TopSoldCourses; 
+export default TopSoldCourses;

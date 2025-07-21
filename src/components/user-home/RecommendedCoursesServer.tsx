@@ -14,7 +14,6 @@ const RecommendedCoursesServer: React.FC = async () => {
       />
     );
   } catch (error) {
-    console.error('Error loading recommended courses:', error);
     
     return (
       <HorizontalCoursesSection
