@@ -41,7 +41,7 @@ export function QuestionInput({ question, setQuestion, handleAddAnswer }: {
   return (
     <div className="max-w-4xl mx-auto">
       <h3 className="text-2xl font-bold text-gray-800 mb-4">Q & A</h3>
-      <Card className="overflow-hidden border border-gray-300 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200">
+      <Card className="overflow-hidden bg-white border border-gray-300 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200">
         <CardContent className="p-0">
           <FormattingToolbar textareaRef={textareaRef} />
           <Textarea
@@ -57,7 +57,7 @@ export function QuestionInput({ question, setQuestion, handleAddAnswer }: {
       
       {/* Preview section if there's formatted content */}
       {question && (
-        <div className="mt-4">
+        <div className="mt-4 bg-white p-4 rounded-lg shadow-sm border border-gray-200">
           <h4 className="text-sm font-semibold text-gray-600 mb-2">Preview:</h4>
           <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
             <div className="prose prose-sm max-w-none">

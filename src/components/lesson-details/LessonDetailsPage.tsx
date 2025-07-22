@@ -48,6 +48,15 @@ const mockSections: CourseSection[] = [
         isCompleted: false,
         isActive: true,
       },
+      {
+        id: 'exam-2-4',
+        title: 'Exam 01',
+        sectionId: 'section-2',
+        order: 3,
+        estimatedTime: 22,
+        isCompleted: false,
+        isActive: false,
+      },
     ],
   },
   {
@@ -70,7 +79,7 @@ export function SectionDetailsPage() {
 
   return (
     <Card className="min-h-screen border-none rounded-none">
-      <CardContent className="p-0">
+      <CardContent className="p-0 bg-gray-50">
         <div className="w-full lg:w-[72%] xl:w-[72%] 2xl:w-[72%] mx-auto flex flex-col min-h-screen">
           {/* Progress Header */}
           <SectionProgressHeader progress={progress} />

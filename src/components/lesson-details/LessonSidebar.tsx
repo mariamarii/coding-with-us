@@ -37,7 +37,7 @@ export function SectionSidebar({
           isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         } ${!isOpen ? 'lg:hidden' : ''}`}
       >
-        <div className="pr-6 py-6 h-full pl-6 sm:pl-0">
+        <div className="pr-6 py-6 h-full pl-6 sm:pl-0 bg-gray-50">
           <SidebarHeader onToggle={onToggle} />
           <div className="space-y-4">
             {sections.map((section) => (
