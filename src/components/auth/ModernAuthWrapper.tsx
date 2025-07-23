@@ -9,7 +9,7 @@ interface ModernAuthWrapperProps {
 
 export function ModernAuthWrapper({ children, title, mode }: ModernAuthWrapperProps) {
   return (
-    <div className="flex min-h-screen bg-[#F9F9F9]">
+    <div className="flex min-h-[calc(100vh-100px)] bg-[#F9F9F9]">
       {/* Left side - Illustration */}
       <div className="items-center justify-center hidden p-12 lg:flex lg:w-1/2">
         <div className="max-w-md">

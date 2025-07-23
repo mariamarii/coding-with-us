@@ -54,9 +54,12 @@ export const useConfirmCodeForm = () => {
     }
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async (): Promise<void> => {
     const secret = code.join('');
-    if (secret.length < 6 || !email) return setError(true);
+    if (secret.length < 6 || !email) {
+      setError(true);
+      return;
+    }
 
     console.log('Attempting to confirm email with:', { email, secret });
     setError(false);
